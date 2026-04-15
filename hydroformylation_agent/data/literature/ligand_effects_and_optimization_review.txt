@@ -1,0 +1,23 @@
+SOURCE: Shields et al. (2021). Bayesian reaction optimization as a tool for chemical synthesis. Nature, 590, 89-96.
+
+CONTEXT FOR HYDROFORMYLATION:
+While this paper focuses on Bayesian optimization methodology applied to Buchwald-Hartwig amination, the principles are directly applicable to hydroformylation parameter optimization.
+
+KEY OPTIMIZATION PRINCIPLES APPLICABLE TO HYDROFORMYLATION:
+1. Parameter space dimensionality: The study found that with 5-7 continuous and categorical parameters, Bayesian optimization consistently outperformed one-factor-at-a-time (OFAT) and random sampling. It required 20-30% fewer experiments to reach the same yield target.
+2. Interaction effects: Non-linear interactions between temperature and ligand choice were the most important factors in their system. In hydroformylation, the temperature-pressure-ligand interaction is similarly complex and cannot be captured by OFAT.
+3. Categorical parameters (ligand choice, solvent) should be encoded numerically for optimization. Recommended: use Hamming-like distance metrics for categorical variables.
+4. Exploitation vs. exploration: Early iterations should prioritize exploration (diverse conditions). Later iterations should exploit the best-performing region. An LLM with chain-of-thought reasoning can naturally implement this strategy by reasoning about "what hasn't been tried yet."
+
+LIGAND STRUCTURE-ACTIVITY RELATIONSHIPS IN HYDROFORMYLATION (from literature synthesis):
+- Cone angle (Tolman): Smaller cone angle ligands like PMe3 (118 deg) give more active but less selective catalysts. Larger cone angle ligands like PPh3 (145 deg) or P(OPh)3 (128 deg) improve selectivity.
+- Bite angle (for bisphosphines): Natural bite angle > 100 degrees (Xantphos: 108, BISBI: 123) gives high L:B selectivity. Narrow bite angle bisphosphines give branched (iso-) selectivity.
+- Electronic effects: More electron-donating ligands (trialkylphosphines) make the metal more electron-rich, strengthening metal-CO bonds and generally improving linear selectivity.
+
+SOLVENT EFFECTS:
+Polar solvents (THF, DCM) can accelerate catalysis by stabilizing cationic intermediates. Non-polar solvents (toluene, hexane) are generally preferred for Rh-based catalysts to avoid catalyst decomposition. Protic solvents should be avoided as they can protonate phosphine ligands or react with aldehydes.
+
+CATALYST LOADING GUIDELINES:
+- Rhodium catalysts: 0.1-1.0 mol% is typical. Lower loadings are preferable for cost but may require longer reactions or higher temperatures.
+- Cobalt catalysts: 1-5 mol% is typical. Cobalt is much cheaper but less active than rhodium.
+- Increasing catalyst loading beyond the optimal can cause aggregation and catalyst deactivation.

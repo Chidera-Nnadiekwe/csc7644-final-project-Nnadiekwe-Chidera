@@ -1,0 +1,23 @@
+# Core LLM & embedding APIs
+anthropic>=0.28.0
+openai>=1.30.0
+
+# Vector search
+faiss-cpu>=1.7.4
+numpy>=1.26.0
+
+# Chemistry validation
+rdkit>=2023.9.1
+
+# Data handling & evaluation
+matplotlib>=3.8.0
+pandas>=2.2.0
+scipy>=1.12.0
+
+# Notebook support
+jupyter>=1.0.0
+ipykernel>=6.29.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.66.0

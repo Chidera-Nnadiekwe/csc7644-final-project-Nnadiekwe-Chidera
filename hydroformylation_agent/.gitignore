@@ -1,0 +1,37 @@
+# Environment & secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# FAISS binary index (large binary; regenerate with build_index.py)
+data/faiss_index/index.faiss
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Matplotlib / output figures (optional — remove this line to track figures)
+results/
+
+# Logs
+*.log

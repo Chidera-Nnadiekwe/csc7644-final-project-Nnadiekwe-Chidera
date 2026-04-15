@@ -1,0 +1,23 @@
+SOURCE: Hood et al. (2020). Highly active cationic cobalt(II) hydroformylation catalysts. Science, 367, 542-548.
+
+SUMMARY:
+This paper reports a new class of cationic cobalt(II) catalysts for olefin hydroformylation that operate under mild conditions. Traditional cobalt-based hydroformylation uses Co2(CO)8, which requires high pressures (200-300 bar) and temperatures (150-180 C). The new cationic cobalt catalysts operate at significantly lower pressures (10-50 bar) and temperatures (60-100 C).
+
+KEY FINDINGS:
+1. Cationic cobalt(II) complexes with chelating bisphosphine ligands show dramatically improved activity compared to Co2(CO)8 under mild conditions.
+2. Linear-to-branch (L:B) selectivity was highest when bulky bisphosphine ligands with wide bite angles were used, achieving L:B ratios above 5:1 for terminal olefins like 1-hexene.
+3. Pressure effect: Increasing total syngas pressure from 10 to 40 bar consistently improved conversion. Above 40 bar, conversion plateaued. CO-to-H2 ratio of 1:1 was optimal for both activity and selectivity.
+4. Temperature effect: The optimal temperature window was 70-90 C. Below 70 C, catalyst activity dropped significantly. Above 100 C, selectivity for linear product decreased, suggesting increased isomerization at higher temperatures.
+5. Substrate scope: The catalysts worked best with alpha (terminal) olefins. Internal olefins required isomerization to the terminal position before hydroformylation could occur efficiently.
+
+MECHANISTIC INSIGHT:
+The key step controlling selectivity is olefin insertion into the Rh-H (or Co-H) bond. A linear insertion gives the linear alkyl intermediate leading to the linear (n-) aldehyde. A branched insertion gives the branched alkyl leading to the iso-aldehyde. Bulky ligands with wide bite angles sterically favor the less hindered linear insertion transition state.
+
+The isomerization pathway (2-olefin to 1-olefin) is enhanced at higher temperatures and lower CO pressures, because CO inhibits beta-hydride elimination, which is the key step in isomerization. Therefore, to suppress isomerization and improve linear selectivity, maintaining high CO pressure is recommended.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- Use bisphosphine ligands with wide natural bite angles (e.g., BISBI, Xantphos) to improve L:B selectivity.
+- Maintain 1:1 CO:H2 ratio for optimal balance of activity and selectivity.
+- Temperature window 70-90 C is recommended.
+- Pressure 20-40 bar for cobalt; 10-30 bar for rhodium catalysts.
+- Ligand-to-metal ratios of 4:1 to 8:1 are optimal; excess ligand beyond 10:1 can inhibit catalysis.

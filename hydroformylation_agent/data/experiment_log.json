@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "substrate": "1-hexene",
+    "target": "maximize linear aldehyde yield and L:B selectivity",
+    "created": "2025-08-01",
+    "version": "1.0"
+  },
+  "runs": [
+    {
+      "iteration": 1,
+      "conditions": {
+        "temperature_C": 80,
+        "pressure_bar": 20,
+        "co_h2_ratio": 1.0,
+        "catalyst": "Rh(acac)(CO)2",
+        "ligand": "PPh3",
+        "ligand_equiv": 4,
+        "substrate_conc_M": 0.5,
+        "reaction_time_h": 4
+      },
+      "outcomes": {
+        "conversion_pct": 72.3,
+        "aldehyde_yield_pct": 65.1,
+        "lb_ratio": 2.8,
+        "ton": 130.2
+      },
+      "reasoning_trace": "Baseline run at standard Wilkinson-type conditions.",
+      "timestamp": "2025-08-01T10:00:00Z"
+    },
+    {
+      "iteration": 2,
+      "conditions": {
+        "temperature_C": 90,
+        "pressure_bar": 25,
+        "co_h2_ratio": 1.0,
+        "catalyst": "Rh(acac)(CO)2",
+        "ligand": "PPh3",
+        "ligand_equiv": 6,
+        "substrate_conc_M": 0.5,
+        "reaction_time_h": 4
+      },
+      "outcomes": {
+        "conversion_pct": 85.4,
+        "aldehyde_yield_pct": 78.2,
+        "lb_ratio": 3.1,
+        "ton": 156.4
+      },
+      "reasoning_trace": "Increased temperature and ligand loading; literature suggests higher L:B with excess phosphine.",
+      "timestamp": "2025-08-02T10:00:00Z"
+    }
+  ]
+}
