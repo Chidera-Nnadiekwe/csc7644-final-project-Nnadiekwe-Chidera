@@ -51,7 +51,7 @@ The following features distinguish this agentic LLM system from a more tradition
 │                        agent_controller.py                                       │
 │                                                                                  │
 │  ┌────────────────┐   ┌────────────────┐   ┌──────────────┐   ┌────────────────┐ │
-│  │ memory_store.py│──▶│rag_retriever.py│──▶│llm_planner.py│──▶│result_parser.py│ │    
+│  │ memory_store.py│──▶│rag_retriever.py│──▶│llm_planner.py│──▶│result_parser.py│ │
 │  │   (JSON log)   │   │     (FAISS)    │   │    (Llama)   │   │   (results)    │ │
 │  └────────────────┘   └────────────────┘   └──────────────┘   └────────────────┘ │
 │          ▲                    ▲                   │                   │          │
@@ -65,12 +65,12 @@ The following features distinguish this agentic LLM system from a more tradition
 ```
 
 **Data flow per iteration:**
-1. `memory.py` → builds history block from JSON log
-2. `retriever.py` → queries FAISS index, returns top-3 literature passages
-3. `planner.py` → sends structured prompt to Claude, receives CoT + JSON conditions
+1. `memory_store.py` → builds history block from JSON log
+2. `rag_retriever.py` → queries FAISS index, returns top-3 literature passages
+3. `llm_planner.py` → sends structured prompt to Llama 3.1 70B, receives CoT + JSON conditions
 4. `validator.py` → checks SMILES validity + physical bounds; rejects bad proposals
-5. User runs experiment; `parser.py` → ingests GC/NMR results
-6. `memory.py` → appends run record to JSON log; repeat
+5. User runs experiment; `result_parser.py` → ingests GC/NMR results
+6. `memory_store.py` → appends run record to JSON log; repeat
 
 ---
 
@@ -78,18 +78,17 @@ The following features distinguish this agentic LLM system from a more tradition
 
 ### Prerequisites
 
-- Python 3.10 or later
-- `pip` (comes with Python)
-- Active Anthropic API key (for Claude)
-- Active OpenAI API key (for embeddings)
-- RDKit (optional but recommended for chemical validation)
-
-> Tested on macOS 14 and Ubuntu 22.04. Windows should work via WSL or native Python, but is not officially tested.
+- Python ≥ 3.10
+- `pip` (Python package manager)
+- Active API credentials for:
+  - Meta Llama 3.1 70B through `openrouter` Python SDK (for LLM planning)
+  - OpenAI API (for embeddings)
+- RDKit (for chemical validation)
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/csc7644-final-project-nnadiekwe/olefin_agent.git
+git clone https://github.com/Chidera-Nnadiekwe/csc7644-final-project-Nnadiekwe-Chidera.git
 cd olefin_agent
 ```
 
