@@ -1,0 +1,48 @@
+[
+  {
+    "iteration": 1,
+    "conditions": {
+      "substrate_smiles": "CCCCCC=C",
+      "catalyst": "RhCl(PPh3)3",
+      "ligand": "PPh3",
+      "ligand_loading_eq": 4.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 80,
+      "pressure_bar": 20,
+      "co_h2_ratio": "1:1",
+      "solvent": "toluene",
+      "reaction_time_h": 6.0
+    },
+    "outcomes": {
+      "conversion_pct": 42.5,
+      "l_b_ratio": 2.1,
+      "ton": 85.0,
+      "notes": "Baseline run. Moderate conversion, low selectivity."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
+  },
+  {
+    "iteration": 2,
+    "conditions": {
+      "substrate_smiles": "CCCCCC=C",
+      "catalyst": "RhCl(PPh3)3",
+      "ligand": "PPh3",
+      "ligand_loading_eq": 8.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 70,
+      "pressure_bar": 30,
+      "co_h2_ratio": "1:1",
+      "solvent": "toluene",
+      "reaction_time_h": 8.0
+    },
+    "outcomes": {
+      "conversion_pct": 58.0,
+      "l_b_ratio": 2.9,
+      "ton": 116.0,
+      "notes": "Higher ligand loading and pressure improved L:B slightly."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
+  }
+]
