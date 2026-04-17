@@ -56,10 +56,10 @@ The following features distinguish this agentic LLM system from a more tradition
 │  └────────────────┘   └────────────────┘   └──────────────┘   └────────────────┘ │
 │          ▲                    ▲                   │                   │          │
 │          │               ┌────┘                   ▼                   │          │
-│          │               │                  ┌─────────────┐           │          │
-│          │               │                  │ validator.py│           │          │
-│          │               │                  │(RDKit+rules)│           │          │
-│          │               │                  └─────────────┘           │          │
+│          │               │                  ┌──────────────┐          │          │
+│          │               │                  │ tool_layer.py│          │          │
+│          │               │                  │(RDKit+rules) │          │          │
+│          │               │                  └──────────────┘          │          │
 │          └───────────────┴────────────────────────────────────────────┘          │
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -68,7 +68,7 @@ The following features distinguish this agentic LLM system from a more tradition
 1. `memory_store.py` → builds history block from JSON log
 2. `rag_retriever.py` → queries FAISS index, returns top-3 literature passages
 3. `llm_planner.py` → sends structured prompt to Llama 3.1 70B, receives CoT + JSON conditions
-4. `validator.py` → checks SMILES validity + physical bounds; rejects bad proposals
+4. `tool_layer.py` → checks SMILES validity + physical bounds; rejects bad proposals
 5. User runs experiment; `result_parser.py` → ingests GC/NMR results
 6. `memory_store.py` → appends run record to JSON log; repeat
 
@@ -139,19 +139,11 @@ This only needs to be run once (or again when you add new literature):
 python scripts/build_index.py
 ```
 
-Optional arguments:
-```
---literature-dir   data/literature/   (default)
---index-dir        data/faiss_index/  (default)
---chunk-size       300                (words per chunk)
---chunk-overlap    50                 (overlap words)
-```
-
 ---
 
 ## Running the Application
 
-### Start the optimization agent
+### Start the optimizat ion agent
 
 ```bash
 python src/agent.py
@@ -159,47 +151,45 @@ python src/agent.py
 
 The agent will:
 1. Load the existing experiment log (or create a fresh one).
-2. Retrieve literature, call Claude, validate, and display proposed conditions.
+2. Retrieve literature, call Llama 3.1 70B, validate, and display proposed conditions.
 3. Prompt you to enter experimental results after each iteration.
 4. Save everything and loop until `--max-iter` is reached or a target is hit.
 
 **Full CLI options:**
 
 ```bash
-python src/agent.py \
-  --max-iter 10 \
-  --target-lb 5.0 \
-  --target-yield 90.0 \
-  --substrate "1-hexene" \
-  --log-path data/experiment_log.json \
+python src/agent_controller.py \
+  --MAX_ITERATIONS 10 \
+  --TARGET_L_B_RATIO 5.0 \
+  --TARGET_CONVERSION 90.0 \
+  --SUBSTRATE "1-hexene" \
+  --CORPUS_PATH "corpus/" 
+  --MEMORY_FILE "experiment_log.json" 
   --ingest-mode manual
 ```
 
 | Flag | Default | Description |
 |---|---|---|
-| `--max-iter` | 10 | Maximum number of optimization iterations |
-| `--target-lb` | 5.0 | L:B ratio for early stopping |
-| `--target-yield` | 90.0 | Aldehyde yield % for early stopping |
-| `--substrate` | `1-hexene` | Substrate name or SMILES |
-| `--log-path` | `data/experiment_log.json` | Path to experiment log |
+| `--MAX_ITERATIONS` | 10 | Maximum number of optimization iterations |
+| `--TARGET_L_B_RATIO` | 5.0 | L:B ratio for early stopping |
+| `--TARGET_CONVERSION` | 90.0 | Aldehyde yield % for early stopping |
+| `--SUBSTRATE` | `1-hexene` | Substrate name or SMILES |
+| `--MEMORY_FILE` | `data/experiment_log.json` | Path to experiment log |
 | `--ingest-mode` | `manual` | Result entry: `manual`, `json`, or `gc` |
 
 ### Result ingestion modes
 
 - **`manual`** — interactive CLI prompts for each outcome value (default for development).
 - **`json`** — supply a JSON string of outcomes (for scripted/automated use).
-- **`gc`** — paste a GC-MS area-% text block; the parser extracts conversion, yield, and L:B automatically.
+- **`gc`** — paste a GC-MS area text block; the parser extracts conversion, yield, and L:B automatically.
 
 ### Run evaluation and generate plots
 
 After at least two experimental iterations:
 
 ```bash
-python scripts/evaluate.py
+python scripts/evaluation.py
 # Figures saved to results/figures/
-
-# Optional: compare against a random-sampling baseline log
-python scripts/evaluate.py --baseline-log data/baseline_log.json
 ```
 
 ### Open the results notebook
@@ -213,10 +203,10 @@ jupyter notebook notebooks/results_analysis.ipynb
 ## Repository Organisation
 
 ```
-olefin_agent/
+hydroformylation_agent/
 ├── data/
 │   ├── experiment_log.json        # Persistent memory — all run records
-│   ├── literature/                # Plain-text .txt files for RAG corpus
+│   ├── corpus/                    # Plain-text .txt files for RAG corpus
 │   │   ├── ligand_effects_hydroformylation.txt
 │   │   └── isomerization_hydroformylation_tandem.txt
 │   └── faiss_index/               # Built FAISS index (generated by build_index.py)
@@ -224,45 +214,47 @@ olefin_agent/
 │       ├── chunks.json
 │       └── metadata.json
 ├── src/
-│   ├── agent.py                   # Main controller loop — entry point
-│   ├── memory.py                  # Load / save / query experiment log
-│   ├── retriever.py               # FAISS RAG pipeline (embed → search → format)
-│   ├── planner.py                 # Claude API call + CoT + JSON parsing
-│   ├── validator.py               # RDKit SMILES check + physical constraint guardrails
-│   ├── parser.py                  # Result ingestion (GC text, JSON, manual)
-│   └── prompts.py                 # All prompt templates (system + iteration + history)
+│   ├── agent_controller.py        # Main controller loop — entry point
+│   ├── memory_store.py            # Load / save / query experiment log
+│   ├── rag_retriever.py           # FAISS RAG pipeline (embed → search → format)
+│   ├── llm_planner.py             # Llama 3.1 70B API call, CoT and JSON parsing
+│   ├── tool_layer.py              # RDKit SMILES check and physical constraint guardrails
+│   ├── result_parser.py           # Result ingestion (GC text, JSON, manual)
+│   └── prompts_templ.py           # All prompt templates (system + iteration + history)
 ├── scripts/
 │   ├── build_index.py             # One-time: chunk → embed → FAISS index
-│   └── evaluate.py                # Metrics computation + convergence plots
+│   └── evaluation.py              # Metrics computation + convergence plots
 ├── notebooks/
-│   └── results_analysis.ipynb    # Interactive visualisation of agent performance
+│   └── results_analysis.ipynb     # Interactive visualisation of agent performance
 ├── results/
 │   └── figures/                   # Auto-generated plots (created at evaluation time)
-├── .env.example                   # Environment variable template (safe to commit)
+├── .env.template                  # Environment variable template (safe to commit)
 ├── .gitignore                     # Excludes .env, venv/, __pycache__, *.faiss, etc.
 ├── requirements.txt
 └── README.md
 ```
 
 **Where to look for what:**
-- Start reading at `src/agent.py` — it calls all other modules in sequence.
-- Prompt engineering lives entirely in `src/prompts.py`.
-- To tune the LLM call (model, max_tokens, temperature), edit `src/planner.py`.
-- To adjust physical constraint bounds, edit the `CONSTRAINTS` dict in `src/validator.py`.
-- Evaluation plots are generated by `scripts/evaluate.py` and visualised in the notebook.
+- Start reading at `src/agent_controller.py` — it calls all other modules in sequence.
+- Prompt engineering lives entirely in `src/prompts_templ.py`.
+- To tune the LLM call (model, max_tokens, temperature), edit `src/llm_planner.py`.
+- Evaluation plots are generated by `scripts/evaluation.py` and visualised in the notebook.
 
 ---
 
 ## Evaluation Design
 
-Success is assessed across three dimensions (per the project proposal):
+Success is assessed across three dimensions:
 
 **Quantitative:**
-- Primary: L:B selectivity ratio and aldehyde yield (%) per iteration vs a random-sampling baseline within the same parameter search space.
+- Primary: Aldehyde yield (%) and L:B selectivity ratio per iteration vs a random-sampling baseline within the same parameter search space.
 - Secondary: convergence speed (iterations to reach a predefined L:B threshold) and final L:B ratio.
 
 **Qualitative:**
-- CoT reasoning traces are assessed for (1) chemical correctness, (2) correct use of retrieved literature, and (3) coherence between reasoning and proposed conditions.
+- CoT reasoning traces are assessed for
+  1. chemical correctness,
+  2. correct use of retrieved literature, and
+  3. coherence between reasoning and proposed conditions.
 
 **System diagnostics:**
 - Validation pass rate, retrieval relevance (logged similarity scores), prompt token cost per iteration.
@@ -273,7 +265,7 @@ Success is assessed across three dimensions (per the project proposal):
 
 This project builds on the following published work and open-source libraries:
 
-- **Anthropic Claude API** — LLM planner backbone. https://docs.anthropic.com
+- **Llama 3.1 70B API** — LLM planner backbone. https://docs.llama.com
 - **OpenAI Embeddings API** — `text-embedding-3-small` for RAG. https://platform.openai.com/docs/guides/embeddings
 - **FAISS** (Facebook AI Research) — efficient similarity search. https://github.com/facebookresearch/faiss
 - **RDKit** — cheminformatics toolkit for SMILES validation. https://www.rdkit.org
@@ -283,10 +275,10 @@ This project builds on the following published work and open-source libraries:
 - **Hood et al. (2020)** — Highly active cationic cobalt(II) hydroformylation catalysts. *Science*, 367, 542–548.
 - **Kearnes et al. (2021)** — The Open Reaction Database. *JACS*, 143, 18820–18826.
 
-No external code was directly adapted. All module implementations are original, informed by the above references and the Anthropic and OpenAI API documentation.
+No external code was directly adapted. All module implementations are original, informed by the above references and the Meta Llama 3.1 70B (OpenRouter) and OpenAI API documentation.
 
 ---
 
 ## License
 
-This repository is for academic use as part of CSC 7644. All rights reserved by the author.
+This repository is for academic use as part of CSC 7644 Final Project. All rights reserved by Chidera C. Nnadiekwe.
