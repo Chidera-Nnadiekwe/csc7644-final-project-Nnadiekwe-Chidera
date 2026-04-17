@@ -89,15 +89,15 @@ The following features distinguish this agentic LLM system from a more tradition
 
 ```bash
 git clone https://github.com/Chidera-Nnadiekwe/csc7644-final-project-Nnadiekwe-Chidera.git
-cd olefin_agent
+cd csc7644-final-project-Nnadiekwe-Chidera/hydroformylation_agent/
 ```
 
 ### 2. Create and activate a virtual environment
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate       # macOS / Linux
-# venv\Scripts\activate        # Windows
+conda create -n csc7644_env python=3.12 # create env with Python 3.12
+conda activate csc7644_env              # activate the environment
+conda deactivate                        # deactivate when done
 ```
 
 ### 3. Install dependencies
@@ -106,7 +106,7 @@ source venv/bin/activate       # macOS / Linux
 pip install -r requirements.txt
 ```
 
-> **Note on RDKit:** If `pip install rdkit` fails on your platform, follow the [official RDKit installation guide](https://www.rdkit.org/docs/Install.html). The agent degrades gracefully — SMILES validation is skipped with a warning if RDKit is absent.
+> **Note on RDKit:** If `pip install rdkit` fails on your platform, follow the [official RDKit installation guide](https://www.rdkit.org/docs/Install.html). The agent degrades gracefully and SMILES validation is skipped with a warning if RDKit is absent.
 
 ### 4. Configure environment variables
 
@@ -117,7 +117,7 @@ cp .env.example .env
 Open `.env` in a text editor and fill in your API keys:
 
 ```
-ANTHROPIC_API_KEY=sk-ant-...
+OPENROUTER_API_KEY=sk-or-...
 OPENAI_API_KEY=sk-...
 ```
 
@@ -129,7 +129,7 @@ export $(grep -v '^#' .env | xargs)
 
 ### 5. Add literature files
 
-Place plain-text (`.txt`) versions of your hydroformylation/isomerization literature in `data/literature/`. Two sample files are included. The more documents you add, the better the RAG retrieval.
+Place plain-text (`.txt`) versions of your hydroformylation/isomerization literature in `data/corpus/`. The more documents are added, the better the RAG retrieval.
 
 ### 6. Build the FAISS index
 
