@@ -12,6 +12,7 @@ Requirements:
     (or: conda install -c conda-forge rdkit)
 """
 
+# Attempt to import RDKit, set a flag if it's not available
 try:
     from rdkit import Chem
     from rdkit.Chem import Descriptors
@@ -21,7 +22,7 @@ except ImportError:
     print("[TOOL] Warning: RDKit not installed. SMILES validation will be skipped.")
     print("       Install with: pip install rdkit")
 
-
+# Define chemical tool functions
 def validate_smiles(smiles: str) -> bool:
     """
     Check if a SMILES string is chemically valid using RDKit.
@@ -42,7 +43,7 @@ def validate_smiles(smiles: str) -> bool:
     print(f"[TOOL] SMILES valid: '{smiles}' → {Chem.MolToSmiles(mol)}")
     return True
 
-
+# Define additional chemical tool functions
 def get_molecular_weight(smiles: str) -> float:
     """
     Return the molecular weight of the compound represented by a SMILES string.
@@ -57,7 +58,7 @@ def get_molecular_weight(smiles: str) -> float:
 
     return round(Descriptors.MolWt(mol), 2)
 
-
+# Define more chemical tools as needed
 def get_atom_count(smiles: str) -> int:
     """Return the number of heavy atoms in the molecule."""
     if not RDKIT_AVAILABLE:
@@ -65,7 +66,7 @@ def get_atom_count(smiles: str) -> int:
     mol = Chem.MolFromSmiles(smiles)
     return mol.GetNumHeavyAtoms() if mol else 0
 
-
+# Define a tool to check for terminal olefins
 def is_terminal_olefin(smiles: str) -> bool:
     """
     Heuristically check if a SMILES is a terminal (alpha) olefin.
