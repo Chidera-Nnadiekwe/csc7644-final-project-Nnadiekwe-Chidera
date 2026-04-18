@@ -14,18 +14,20 @@ For datasets < 20 runs, the full history is always returned.
 For larger datasets, a summarized version is returned to save tokens.
 """
 
+# Import necessary libraries
 import json
 import os
 from typing import Optional
 
-
+# Constants
 SUMMARY_THRESHOLD = 20   # After this many runs, summarize older ones
 
-
+# MemoryStore class definition
 class MemoryStore:
     def __init__(self, filepath: str = "experiment_log.json"):
         self.filepath = filepath
 
+    # Load history from JSON file
     def load_history(self) -> list:
         """Load and return the full experiment history list."""
         if not os.path.exists(self.filepath):
@@ -37,7 +39,8 @@ class MemoryStore:
         except (json.JSONDecodeError, IOError) as e:
             print(f"[MEMORY] Warning: Could not load history — {e}")
             return []
-
+        
+    # Save history to JSON file
     def save_history(self, history: list) -> None:
         """Save the full history list to the JSON file."""
         try:
@@ -45,7 +48,8 @@ class MemoryStore:
                 json.dump(history, f, indent=2)
         except IOError as e:
             print(f"[MEMORY] Warning: Could not save history — {e}")
-
+            
+    # Get history formatted for LLM prompt
     def get_history_for_prompt(self, history: list) -> list:
         """
         Return history in a form suitable for injection into the LLM prompt.
@@ -61,7 +65,8 @@ class MemoryStore:
 
         summary = self._summarize_older_runs(older)
         return [{"summary_of_older_runs": summary}] + recent
-
+    
+    # Helper method to summarize older runs
     def _summarize_older_runs(self, runs: list) -> str:
         """Create a brief textual summary of older experimental runs."""
         if not runs:
@@ -80,13 +85,14 @@ class MemoryStore:
             f"Worst L:B = {worst['outcomes'].get('l_b_ratio', '?')} "
             f"at conditions {worst['conditions']}."
         )
-
+    
+    # Convenience method to add a new run record
     def add_run(self, run_record: dict) -> None:
         """Convenience method: load, append, and save in one call."""
         history = self.load_history()
         history.append(run_record)
         self.save_history(history)
-
+    # Method to get the best run based on a specified metric
     def get_best_run(self, metric: str = "l_b_ratio") -> Optional[dict]:
         """Return the run with the highest value for a given outcome metric."""
         history = self.load_history()
