@@ -14,12 +14,13 @@ Currently supports:
   - compute_l_b_ratio()   : calculates L:B from individual area values
 """
 
+# Import necessary libraries
 import csv
 import json
 import os
 from typing import Optional
 
-
+# Define functions for parsing and processing experimental results
 def parse_experimental_result(
     conversion_pct: float,
     l_b_ratio: float,
@@ -50,7 +51,7 @@ def parse_experimental_result(
         "notes":          str(notes).strip()
     }
 
-
+# Define function to compute L:B ratio from GC peak areas
 def compute_l_b_ratio(linear_area: float, branch_area: float) -> float:
     """
     Compute the linear-to-branch (L:B) ratio from GC peak areas.
@@ -68,7 +69,7 @@ def compute_l_b_ratio(linear_area: float, branch_area: float) -> float:
         return 0.0
     return round(linear_area / branch_area, 3)
 
-
+# Define function to parse GC results from a CSV file
 def parse_from_gc_csv(filepath: str) -> Optional[dict]:
     """
     Parse a GC results CSV file into a structured outcome dict.
@@ -89,7 +90,7 @@ def parse_from_gc_csv(filepath: str) -> Optional[dict]:
     if not os.path.exists(filepath):
         print(f"[PARSER] File not found: {filepath}")
         return None
-
+    # Read the CSV and extract areas into a dict
     areas = {}
     try:
         with open(filepath, "r", newline="") as f:
@@ -131,7 +132,7 @@ def parse_from_gc_csv(filepath: str) -> Optional[dict]:
         notes=f"Parsed from {os.path.basename(filepath)}"
     )
 
-
+# Define function to parse results from a dict (e.g., manual input)
 def parse_from_dict(raw: dict) -> dict:
     """
     Parse and validate a result dict that may come from manual input or another source.
@@ -144,7 +145,7 @@ def parse_from_dict(raw: dict) -> dict:
         notes=raw.get("notes", raw.get("note", ""))
     )
 
-
+# Define function to load seed data from a JSON file
 def load_seed_data(filepath: str) -> list:
     """
     Load initial experimental data from a JSON file to seed the memory store.
@@ -172,3 +173,4 @@ def load_seed_data(filepath: str) -> list:
     except (json.JSONDecodeError, IOError) as e:
         print(f"[PARSER] Error reading seed data: {e}")
         return []
+    
