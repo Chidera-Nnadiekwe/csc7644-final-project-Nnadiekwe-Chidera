@@ -7,20 +7,20 @@ Steps:
   1. Load .txt files from a corpus directory
   2. Split them into overlapping chunks
   3. Embed each chunk using OpenAI text-embedding-3-small
-  4. Index them in FAISS for fast nearest-neighbor search
+  4. Index them in FAISS (IndexFlatIP with L2-normalised vectors = cosine similarity)
   5. At query time, embed the query and return the top-k most similar chunks
 
 Requirements:
     pip install openai faiss-cpu numpy
-
-The index is built once and cached on disk (corpus_index.faiss + corpus_chunks.json)
-so you don't re-embed on every run.
 """
 
+# Import necessary libraries
 import json
 import os
 import numpy as np
+from pathlib import Path
 
+# Attempt to import FAISS and OpenAI, with graceful degradation if not available
 try:
     import faiss
     FAISS_AVAILABLE = True
@@ -36,171 +36,201 @@ except ImportError:
     OPENAI_AVAILABLE = False
     print("[RAG] Warning: openai package not installed. RAG will return placeholder results.")
 
-EMBED_MODEL = "text-embedding-3-small"
-INDEX_FILE  = "corpus_index.faiss"
-CHUNKS_FILE = "corpus_chunks.json"
-CHUNK_SIZE  = 400    # words per chunk
-CHUNK_OVERLAP = 50   # words of overlap between chunks
+# Constants for embedding and chunking
+EMBED_MODEL   = "text-embedding-3-small"
+CHUNK_SIZE    = 400   # words per chunk (matches report: CHUNK_SIZE=400)
+CHUNK_OVERLAP = 50    # words of overlap (matches report: CHUNK_OVERLAP=50)
+EMBEDDING_DIM = 1536  # dimension for text-embedding-3-small
 
-
+# RAGRetriever class definition
 class RAGRetriever:
-    def __init__(self, corpus_dir: str = "corpus/"):
+    def __init__(self, corpus_dir: str = "data/corpus",
+                 index_dir: str = "data/faiss_index"):
         self.corpus_dir = corpus_dir
-        self.chunks = []
-        self.index = None
+        # CHANGE: index stored in a dedicated directory, not CWD
+        self.index_dir  = Path(index_dir)
+        self.index_file = self.index_dir / "index.faiss"
+        self.chunks_file = self.index_dir / "chunks.json"
+        self.metadata_file = self.index_dir / "metadata.json"
 
-        if OPENAI_AVAILABLE:
-            self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.chunks = []
+        self.index  = None
+
+        api_key = os.getenv("OPENAI_API_KEY")
+        if OPENAI_AVAILABLE and api_key:
+            self.client = OpenAI(api_key=api_key)
         else:
+            if OPENAI_AVAILABLE and not api_key:
+                print("[RAG] Warning: OPENAI_API_KEY not set. Using placeholder embeddings.")
             self.client = None
 
         # Try to load cached index; build if not found
-        if os.path.exists(INDEX_FILE) and os.path.exists(CHUNKS_FILE):
+        if self.index_file.exists() and self.chunks_file.exists():
             self._load_index()
         else:
             self._build_index()
 
-    # ─────────────────────────────────────────────
-    #  Index Building
-    # ─────────────────────────────────────────────
-
+    # Define helper methods for loading texts
     def _load_texts_from_corpus(self) -> list:
         """Read all .txt files from the corpus directory."""
         texts = []
-        if not os.path.exists(self.corpus_dir):
-            print(f"[RAG] Corpus directory '{self.corpus_dir}' not found. Creating empty folder.")
-            os.makedirs(self.corpus_dir, exist_ok=True)
+        corpus_path = Path(self.corpus_dir)
+        if not corpus_path.exists():
+            print(f"[RAG] Corpus directory '{self.corpus_dir}' not found. Creating it.")
+            corpus_path.mkdir(parents=True, exist_ok=True)
             return texts
 
-        for filename in os.listdir(self.corpus_dir):
-            if filename.endswith(".txt"):
-                filepath = os.path.join(self.corpus_dir, filename)
-                with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
-                    content = f.read().strip()
-                if content:
-                    texts.append({"source": filename, "text": content})
+        for filename in sorted(corpus_path.glob("*.txt")):
+            content = filename.read_text(encoding="utf-8", errors="ignore").strip()
+            if content:
+                texts.append({"source": filename.name, "text": content})
 
-        print(f"[RAG] Loaded {len(texts)} documents from '{self.corpus_dir}'.")
+        print(f"[RAG] Loaded {len(texts)} document(s) from '{self.corpus_dir}'.")
         return texts
 
+    # Define helper method for chunking text
     def _chunk_text(self, text: str, source: str) -> list:
         """Split a document into overlapping word-based chunks."""
-        words = text.split()
+        words  = text.split()
         chunks = []
-        start = 0
+        start  = 0
+        chunk_idx = 0
         while start < len(words):
-            end = min(start + CHUNK_SIZE, len(words))
+            end        = min(start + CHUNK_SIZE, len(words))
             chunk_text = " ".join(words[start:end])
-            chunks.append({"text": chunk_text, "source": source})
+            chunks.append({
+                "chunk_id": f"{source}_{chunk_idx}",
+                "text":     chunk_text,
+                "source":   source,
+            })
+            chunk_idx += 1
+            if end == len(words):
+                break
             start += CHUNK_SIZE - CHUNK_OVERLAP
         return chunks
 
+    # Define helper method for embedding texts
     def _embed_texts(self, texts: list) -> np.ndarray:
         """Call OpenAI embedding API and return an array of vectors."""
         if not self.client:
-            # Return random vectors as placeholder when OpenAI not available
             print("[RAG] Using random placeholder embeddings (OpenAI not available).")
-            return np.random.rand(len(texts), 1536).astype("float32")
+            return np.random.rand(len(texts), EMBEDDING_DIM).astype("float32")
 
         print(f"[RAG] Embedding {len(texts)} chunks via OpenAI API...")
-        response = self.client.embeddings.create(model=EMBED_MODEL, input=texts)
-        vectors = [item.embedding for item in response.data]
-        return np.array(vectors, dtype="float32")
+        # Batch to stay within API limits
+        all_vecs = []
+        batch_size = 50
+        for i in range(0, len(texts), batch_size):
+            batch    = texts[i: i + batch_size]
+            response = self.client.embeddings.create(model=EMBED_MODEL, input=batch)
+            all_vecs.extend([item.embedding for item in response.data])
+        return np.array(all_vecs, dtype="float32")
 
-    def _build_index(self):
+    # Define method to build the FAISS index
+    def _build_index(self) -> None:
         """Build the FAISS index from the corpus and cache it to disk."""
+        self.index_dir.mkdir(parents=True, exist_ok=True)
         raw_docs = self._load_texts_from_corpus()
 
         if not raw_docs:
-            print("[RAG] No documents to index. Retrieval will return empty results.")
-            print("      Add .txt files to the 'corpus/' folder and re-run to enable RAG.")
+            print("[RAG] No documents to index. Retrieval will return fallback text.")
+            print("      Add .txt files to 'data/corpus/' and re-run build_index.py.")
             self.chunks = []
-            self.index = None
+            self.index  = None
             return
 
-        # Chunk all documents
         all_chunks = []
         for doc in raw_docs:
-            chunks = self._chunk_text(doc["text"], doc["source"])
-            all_chunks.extend(chunks)
+            all_chunks.extend(self._chunk_text(doc["text"], doc["source"]))
 
-        print(f"[RAG] Created {len(all_chunks)} chunks total.")
+        print(f"[RAG] Created {len(all_chunks)} chunk(s) total.")
         self.chunks = all_chunks
 
-        # Embed chunks
         texts_only = [c["text"] for c in all_chunks]
-        vectors = self._embed_texts(texts_only)
+        vectors    = self._embed_texts(texts_only)
 
-        # Build FAISS index (L2 distance; cosine would require normalization)
-        if FAISS_AVAILABLE:
-            dim = vectors.shape[1]
-            self.index = faiss.IndexFlatL2(dim)
-            self.index.add(vectors)
-
-            # Save to disk
-            faiss.write_index(self.index, INDEX_FILE)
-            with open(CHUNKS_FILE, "w") as f:
-                json.dump(self.chunks, f, indent=2)
-            print(f"[RAG] Index saved to '{INDEX_FILE}' and '{CHUNKS_FILE}'.")
-        else:
+        if not FAISS_AVAILABLE:
             print("[RAG] FAISS not available — index not built.")
+            return
 
-    def _load_index(self):
+        # Use IndexFlatIP with L2-normalised vectors (cosine similarity)
+        faiss.normalize_L2(vectors)
+        self.index = faiss.IndexFlatIP(EMBEDDING_DIM)
+        self.index.add(vectors)
+
+        # Save index and metadata
+        faiss.write_index(self.index, str(self.index_file))
+        self.chunks_file.write_text(json.dumps(self.chunks, indent=2))
+        metadata = {
+            "index_version":   "1.0",
+            "embedding_model": EMBED_MODEL,
+            "num_chunks":      len(all_chunks),
+            "chunk_size":      CHUNK_SIZE,
+            "chunk_overlap":   CHUNK_OVERLAP,
+            "sources":         [d["source"] for d in raw_docs],
+        }
+        self.metadata_file.write_text(json.dumps(metadata, indent=2))
+        print(f"[RAG] Index saved to '{self.index_file}'.")
+
+    # Define method to load the FAISS index from disk
+    def _load_index(self) -> None:
         """Load a previously built FAISS index from disk."""
         if not FAISS_AVAILABLE:
             return
         try:
-            self.index = faiss.read_index(INDEX_FILE)
-            with open(CHUNKS_FILE, "r") as f:
-                self.chunks = json.load(f)
-            print(f"[RAG] Loaded cached index with {len(self.chunks)} chunks.")
+            self.index  = faiss.read_index(str(self.index_file))
+            self.chunks = json.loads(self.chunks_file.read_text())
+            print(f"[RAG] Loaded cached index with {len(self.chunks)} chunk(s).")
         except Exception as e:
             print(f"[RAG] Could not load cached index: {e}. Rebuilding...")
             self._build_index()
 
-    # ─────────────────────────────────────────────
-    #  Retrieval
-    # ─────────────────────────────────────────────
-
+    #  Retrieval method
     def retrieve(self, query: str, top_k: int = 3) -> list:
         """
         Embed the query and return the top_k most relevant text chunks.
-        Each result is a dict with keys: 'text', 'source'.
+
+        Returns:
+            list of dicts, each with keys: 'text', 'source', 'score'
         """
         if self.index is None or not self.chunks:
-            # Graceful fallback when no corpus is available
             return [{
                 "text": (
-                    "No literature corpus available. "
-                    "Add .txt files to the 'corpus/' folder to enable RAG. "
+                    "No literature corpus available. Add .txt files to 'data/corpus/' "
+                    "and run 'python scripts/build_index.py' to enable RAG. "
                     "General knowledge: for Rh-catalyzed hydroformylation, "
                     "increasing CO pressure and using bulky phosphine ligands "
-                    "tends to improve linear selectivity (higher L:B ratio)."
+                    "(higher cone angle) tends to improve linear selectivity (L:B ratio)."
                 ),
-                "source": "fallback_knowledge"
+                "source": "fallback_knowledge",
+                "score":  0.0,
             }]
 
-        # Embed the query
+        # Embed query
         if self.client:
             response = self.client.embeddings.create(model=EMBED_MODEL, input=[query])
-            q_vec = np.array([response.data[0].embedding], dtype="float32")
+            q_vec    = np.array([response.data[0].embedding], dtype="float32")
         else:
-            q_vec = np.random.rand(1, 1536).astype("float32")
+            q_vec = np.random.rand(1, EMBEDDING_DIM).astype("float32")
 
-        # Search the FAISS index
+        # Normalise query vector for cosine similarity
+        faiss.normalize_L2(q_vec) if FAISS_AVAILABLE else None
+
         distances, indices = self.index.search(q_vec, top_k)
 
         results = []
-        for idx in indices[0]:
+        for dist, idx in zip(distances[0], indices[0]):
             if 0 <= idx < len(self.chunks):
-                results.append(self.chunks[idx])
+                chunk = self.chunks[idx].copy()
+                chunk["score"] = float(dist)   # cosine similarity score
+                results.append(chunk)
 
         return results
 
-    def rebuild_index(self):
+    # Define method to force rebuild of the index (e.g., after adding new papers)
+    def rebuild_index(self) -> None:
         """Force a complete rebuild of the index (e.g., after adding new papers)."""
-        if os.path.exists(INDEX_FILE):
-            os.remove(INDEX_FILE)
-        if os.path.exists(CHUNKS_FILE):
-            os.remove(CHUNKS_FILE)
+        for f in [self.index_file, self.chunks_file, self.metadata_file]:
+            if f.exists():
+                f.unlink()
         self._build_index()
