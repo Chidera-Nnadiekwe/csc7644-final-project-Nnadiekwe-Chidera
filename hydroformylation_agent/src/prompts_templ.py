@@ -33,7 +33,7 @@ JSON:
     "ligand":                    "<e.g., PPh3, BISBI, Xantphos>",
     "ligand_loading_eq":         <float, molar equiv vs catalyst, 1.0-20.0>,
     "catalyst_loading_mol_pct":  <float, mol% vs substrate, 0.1-5.0>,
-    "temperature_C":             <float, 40-120>,
+    "temperature_C":             <float, 40-160>,
     "pressure_bar":              <float, 5-80>,
     "co_h2_ratio":               "<string, e.g. '1:1' or '1:2'>",
     "solvent":                   "<e.g., toluene, THF, DCM>",
@@ -43,7 +43,7 @@ JSON:
 
 Rules:
 - ALL fields in proposed_conditions are REQUIRED.
-- Keep temperature_C between 40 and 120.
+- Keep temperature_C between 40 and 160.
 - Keep pressure_bar between 5 and 80.
 - ligand_loading_eq must be between 1.0 and 20.0.
 - catalyst_loading_mol_pct must be between 0.1 and 5.0.
@@ -75,7 +75,7 @@ object conforming to the schema in your system instructions. \
 Do not propose conditions already attempted.
 """
 
-
+# History Entry Template: Used to format each prior run's conditions and outcomes into a text block for the prompt
 HISTORY_ENTRY_TEMPLATE = """\
 Iteration {iteration}:
   Conditions: T={temperature_C}°C, P={pressure_bar} bar, CO/H2={co_h2_ratio}, \
@@ -86,7 +86,7 @@ cat. loading={catalyst_loading_mol_pct} mol%, solvent={solvent}, t={reaction_tim
   Agent reasoning summary: {reasoning_trace}
 """
 
-
+# History Summary Template: Used to create a concise summary of all prior runs for the prompt
 HISTORY_SUMMARY_TEMPLATE = """\
 [Summary of {n_runs} prior runs]
 Best L:B ratio achieved: {best_lb} (Iteration {best_lb_iter})
@@ -96,12 +96,13 @@ T={last_T}°C, P={last_P} bar, conversion={last_conv}%, L:B={last_lb}
 Trend: {trend_note}
 """
 
-
+# Literature Passage Template: Used to format each retrieved literature passage for the prompt
 LITERATURE_PASSAGE_TEMPLATE = """\
 [Source: {source}, similarity score: {score:.3f}]
 {passage}
 """
 
+# No Literature Found Template: Used when no relevant literature passages are retrieved
 NO_LITERATURE_FOUND = """\
 No closely matching literature passages were retrieved for the current conditions. \
 Proceed from first principles and prior experimental history alone.
