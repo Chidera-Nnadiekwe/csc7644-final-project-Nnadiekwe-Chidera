@@ -2,7 +2,7 @@
   {
     "iteration": 1,
     "conditions": {
-      "substrate_smiles": "CCCCCC=C",
+      "substrate_smiles": "CCCCC=C",
       "catalyst": "RhCl(PPh3)3",
       "ligand": "PPh3",
       "ligand_loading_eq": 4.0,
@@ -25,7 +25,7 @@
   {
     "iteration": 2,
     "conditions": {
-      "substrate_smiles": "CCCCCC=C",
+      "substrate_smiles": "CCCCC=C",
       "catalyst": "RhCl(PPh3)3",
       "ligand": "PPh3",
       "ligand_loading_eq": 8.0,
