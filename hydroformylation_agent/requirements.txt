@@ -1,5 +1,4 @@
 # Core LLM & embedding APIs
-anthropic>=0.28.0
 openai>=1.30.0
 
 # Vector search
