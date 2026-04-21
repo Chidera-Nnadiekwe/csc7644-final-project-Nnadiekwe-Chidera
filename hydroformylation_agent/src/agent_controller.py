@@ -294,6 +294,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed-file",   type=str,   default=DEFAULT_SEED_FILE,
                         dest="seed_file",
                         help="Path to seed data JSON")
+    parser.add_argument("--target-ton", type=float, default=0.0,
+                        dest="target_ton",
+                        help="Minimum TON for stopping (default: 0.0, i.e. not enforced)")
+    parser.add_argument("--consecutive", type=int, default=2,
+                        dest="consecutive_required",
+                        help="Consecutive runs all targets must be met before stopping (default: 2)")
     return parser.parse_args()
 
 
