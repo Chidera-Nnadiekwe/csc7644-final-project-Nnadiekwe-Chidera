@@ -3,21 +3,21 @@
     "iteration": 1,
     "conditions": {
       "substrate_smiles": "CCCCC=C",
-      "catalyst": "RhCl(PPh3)3",
-      "ligand": "PPh3",
-      "ligand_loading_eq": 4.0,
+      "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+      "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+      "ligand_loading_eq": 1.0,
       "catalyst_loading_mol_pct": 1.0,
-      "temperature_C": 80,
-      "pressure_bar": 20,
+      "temperature_C": 160,
+      "pressure_bar": 52,
       "co_h2_ratio": "1:1",
-      "solvent": "toluene",
-      "reaction_time_h": 6.0
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
     },
     "outcomes": {
-      "conversion_pct": 42.5,
-      "l_b_ratio": 2.1,
-      "ton": 85.0,
-      "notes": "Baseline run. Moderate conversion, low selectivity."
+      "conversion_pct": 37.2,
+      "l_b_ratio": 0.92,
+      "ton": 340.0,
+      "notes": "Baseline run. good conversion, very low selectivity."
     },
     "reasoning": "Seed data — manual run, no LLM reasoning.",
     "retrieved_passages": []
@@ -26,23 +26,299 @@
     "iteration": 2,
     "conditions": {
       "substrate_smiles": "CCCCC=C",
-      "catalyst": "RhCl(PPh3)3",
-      "ligand": "PPh3",
-      "ligand_loading_eq": 8.0,
+      "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+      "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+      "ligand_loading_eq": 1.0,
       "catalyst_loading_mol_pct": 1.0,
-      "temperature_C": 70,
-      "pressure_bar": 30,
+      "temperature_C": 160,
+      "pressure_bar": 52,
       "co_h2_ratio": "1:1",
-      "solvent": "toluene",
-      "reaction_time_h": 8.0
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
     },
     "outcomes": {
-      "conversion_pct": 58.0,
-      "l_b_ratio": 2.9,
-      "ton": 116.0,
-      "notes": "Higher ligand loading and pressure improved L:B slightly."
+      "conversion_pct": 35.7,
+      "l_b_ratio": 0.93,
+      "ton": 326.4,
+      "notes": "Baseline run. good conversion, very low selectivity."
     },
     "reasoning": "Seed data — manual run, no LLM reasoning.",
     "retrieved_passages": []
-  }
+  },
+  {
+    "iteration": 3,
+    "conditions": {
+      "substrate_smiles": "CCCCC=C",
+      "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+      "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+      "ligand_loading_eq": 1.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 160,
+      "pressure_bar": 52,
+      "co_h2_ratio": "1:1",
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
+    },
+    "outcomes": {
+      "conversion_pct": 40.7,
+      "l_b_ratio": 0.90,
+      "ton": 371.8,
+      "notes": "Baseline run. good conversion, very low selectivity."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
+  },
+  {
+    "iteration": 4,
+    "conditions": {
+      "substrate_smiles": "CCCCC=C",
+      "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+      "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+      "ligand_loading_eq": 1.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 160,
+      "pressure_bar": 52,
+      "co_h2_ratio": "1:1",
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
+    },
+    "outcomes": {
+      "conversion_pct": 48.8,
+      "l_b_ratio": 1.0,
+      "ton": 445.9,
+      "notes": "Baseline run. good conversion, very low selectivity."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
+  },
+  {
+    "iteration": 5,
+    "conditions": {
+      "substrate_smiles": "CCCCC=C",
+      "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+      "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+      "ligand_loading_eq": 1.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 160,
+      "pressure_bar": 52,
+      "co_h2_ratio": "1:1",
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
+    },
+    "outcomes": {
+      "conversion_pct": 59.0,
+      "l_b_ratio": 1.0,
+      "ton": 539.0,
+      "notes": "Baseline run. good conversion, very low selectivity."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
+  },
+  {
+    "iteration": 6,
+    "conditions": {
+      "substrate_smiles": "CCCCC=C",
+      "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+      "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+      "ligand_loading_eq": 1.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 160,
+      "pressure_bar": 52,
+      "co_h2_ratio": "1:1",
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
+    },
+    "outcomes": {
+      "conversion_pct": 46.3,
+      "l_b_ratio": 0.91,
+      "ton": 423.0,
+      "notes": "Baseline run. good conversion, very low selectivity."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
+  },
+  {
+    "iteration": 7,
+    "conditions": {
+      "substrate_smiles": "CCCCC=C",
+      "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+      "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+      "ligand_loading_eq": 1.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 160,
+      "pressure_bar": 52,
+      "co_h2_ratio": "1:1",
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
+    },
+    "outcomes": {
+      "conversion_pct": 48.2,
+      "l_b_ratio": 1.03,
+      "ton": 441.0,
+      "notes": "Baseline run. good conversion, very low selectivity."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
+   },
+    {
+      "iteration": 8,
+      "conditions": {
+        "substrate_smiles": "CCCCC=C",
+        "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+        "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+        "ligand_loading_eq": 1.0,
+        "catalyst_loading_mol_pct": 1.0,
+        "temperature_C": 160,
+        "pressure_bar": 52,
+        "co_h2_ratio": "1:1",
+        "solvent": "tetraglyme",
+        "reaction_time_h": 1.5
+      },
+      "outcomes": {
+        "conversion_pct": 51.9,
+        "l_b_ratio": 0.98,
+        "ton": 474.3,
+        "notes": "Baseline run. good conversion, very low selectivity."
+      },
+      "reasoning": "Seed data — manual run, no LLM reasoning.",
+      "retrieved_passages": []
+    },
+    {
+      "iteration": 9,
+      "conditions": {
+        "substrate_smiles": "CCCCC=C",
+        "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+        "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+        "ligand_loading_eq": 1.0,
+        "catalyst_loading_mol_pct": 1.0,
+        "temperature_C": 160,
+        "pressure_bar": 52,
+        "co_h2_ratio": "1:1",
+        "solvent": "toluene",
+        "reaction_time_h": 1.5
+      },
+      "outcomes": {
+        "conversion_pct": 9.3,
+        "l_b_ratio": 1.16,
+        "ton": 85.4,
+        "notes": "Baseline run. very low conversion, very low selectivity."
+      },
+      "reasoning": "Seed data — manual run, no LLM reasoning.",
+      "retrieved_passages": []
+    },
+    {
+      "iteration": 10,
+      "conditions": {
+        "substrate_smiles": "CCCCC=C",
+        "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+        "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+        "ligand_loading_eq": 1.0,
+        "catalyst_loading_mol_pct": 1.0,
+        "temperature_C": 160,
+        "pressure_bar": 52,
+        "co_h2_ratio": "1:1",
+        "solvent": "tetrahydrofuran",
+        "reaction_time_h": 1.5
+      },
+      "outcomes": {
+        "conversion_pct": 19.1,
+        "l_b_ratio": 0.92,
+        "ton": 174.0,
+        "notes": "Baseline run. very low conversion, very low selectivity."
+      },
+      "reasoning": "Seed data — manual run, no LLM reasoning.",
+      "retrieved_passages": []
+    },
+    {
+      "iteration": 11,
+      "conditions": {
+        "substrate_smiles": "CCCCC=C",
+        "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+        "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+        "ligand_loading_eq": 1.0,
+        "catalyst_loading_mol_pct": 1.0,
+        "temperature_C": 160,
+        "pressure_bar": 52,
+        "co_h2_ratio": "1:1",
+        "solvent": "tetrahydrofuran",
+        "reaction_time_h": 1.5
+      },
+      "outcomes": {
+        "conversion_pct": 16.0,
+        "l_b_ratio": 0.79,
+        "ton": 146.1,
+        "notes": "Baseline run. very low conversion, very low selectivity."
+      },
+      "reasoning": "Seed data — manual run, no LLM reasoning.",
+      "retrieved_passages": []
+    },
+    {
+      "iteration": 12,
+      "conditions": {
+        "substrate_smiles": "CCCCC=C",
+        "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+        "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+        "ligand_loading_eq": 1.0,
+        "catalyst_loading_mol_pct": 1.0,
+        "temperature_C": 160,
+        "pressure_bar": 52,
+        "co_h2_ratio": "1:1",
+        "solvent": "toluene",
+        "reaction_time_h": 1.5
+      },
+      "outcomes": {
+        "conversion_pct": 6.7,
+        "l_b_ratio": 1.10,
+        "ton": 61.6,
+        "notes": "Baseline run. very low conversion, very low selectivity."
+      },
+      "reasoning": "Seed data — manual run, no LLM reasoning.",
+      "retrieved_passages": []
+    },
+    {
+      "iteration": 13,
+      "conditions": {
+        "substrate_smiles": "CCCCC=C",
+        "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+        "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+        "ligand_loading_eq": 1.0,
+        "catalyst_loading_mol_pct": 1.0,
+        "temperature_C": 160,
+        "pressure_bar": 52,
+        "co_h2_ratio": "1:1",
+        "solvent": "toluene",
+        "reaction_time_h": 1.5
+      },
+      "outcomes": {
+        "conversion_pct": 5.70,
+        "l_b_ratio": 0.89,
+        "ton": 52.0,
+        "notes": "Baseline run. very low conversion, very low selectivity."
+      },
+      "reasoning": "Seed data — manual run, no LLM reasoning.",
+      "retrieved_passages": []
+    },
+    {
+      "iteration": 14,
+      "conditions": {
+        "substrate_smiles": "CCCCC=C",
+        "catalyst": "HCoCO(Ph2PC2H4(PPh)C2H4PPh2)",
+        "ligand": "Ph2PC2H4(PPh)C2H4PPh2",
+        "ligand_loading_eq": 1.0,
+        "catalyst_loading_mol_pct": 1.0,
+        "temperature_C": 160,
+        "pressure_bar": 52,
+        "co_h2_ratio": "1:1",
+        "solvent": "Anisole",
+        "reaction_time_h": 1.5
+      },
+      "outcomes": {
+        "conversion_pct": 12.0,
+        "l_b_ratio": 1.19,
+        "ton": 109.8,
+        "notes": "Baseline run. very low conversion, very low selectivity."
+      },
+      "reasoning": "Seed data — manual run, no LLM reasoning.",
+      "retrieved_passages": []
+    }
 ]
