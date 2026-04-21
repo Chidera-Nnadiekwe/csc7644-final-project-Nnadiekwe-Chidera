@@ -16,6 +16,8 @@ CLI options:
     --memory-file    Path to experiment log JSON (default: data/experiment_log.json)
     --ingest-mode    Result entry mode: manual | json | gc (default: manual)
     --seed-file      Path to seed data JSON to pre-load on first run
+    --target-ton     Minimum TON for stopping (default: 0.0, not enforced)
+    --consecutive    Consecutive runs all targets must be met before stopping (default: 2)
 
 Before running:
     pip install -r requirements.txt
@@ -172,8 +174,10 @@ def run_agent(args: argparse.Namespace) -> None:
 
     iteration = len(history) + 1
 
+    # All arguments passed through
     while not check_stopping_criteria(
-        history, args.max_iter, args.target_lb, args.target_conv
+        history, args.max_iter, args.target_lb, args.target_conv,
+        args.target_ton, args.consecutive_required
     ):
         print(f"\n{'─' * 65}")
         print(f"  ITERATION {iteration}  |  Substrate: {args.substrate}")
