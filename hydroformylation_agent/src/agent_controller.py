@@ -56,18 +56,36 @@ DEFAULT_SEED_FILE         = str(PROJECT_ROOT / "data" / "seed_data.json")
 
 # Defined a function to check stopping criteria based on iteration count and target metrics
 def check_stopping_criteria(history: list, max_iter: int,
-                             target_lb: float, target_conv: float) -> bool:
-    """Return True if the agent should stop."""
+                             target_lb: float, target_conv: float,
+                             target_ton: float = 0.0,
+                             consecutive_required: int = 2) -> bool:
+    """Return True if the agent should stop.
+    
+    Stops when ALL three metrics (L:B, conversion, TON) meet their targets
+    simultaneously for `consecutive_required` runs in a row, or when
+    max_iter is reached.
+    """
     if len(history) >= max_iter:
         print(f"\n[STOP] Reached maximum iterations ({max_iter}).")
         return True
-    if history:
-        outcomes = history[-1].get("outcomes", {})
-        lb   = outcomes.get("l_b_ratio", 0)
-        conv = outcomes.get("conversion_pct", 0)
-        if lb >= target_lb and conv >= target_conv:
-            print(f"\n[STOP] Target achieved! L:B = {lb:.3f}, Conversion = {conv:.1f}%")
-            return True
+
+    if len(history) < consecutive_required:
+        return False
+
+    # Check the last N runs all satisfy every threshold simultaneously
+    recent = history[-consecutive_required:]
+    all_met = all(
+        r.get("outcomes", {}).get("l_b_ratio", 0)       >= target_lb   and
+        r.get("outcomes", {}).get("conversion_pct", 0)  >= target_conv and
+        r.get("outcomes", {}).get("ton", 0)             >= target_ton
+        for r in recent
+    )
+
+    if all_met:
+        print(f"\n[STOP] All targets met for {consecutive_required} consecutive run(s).")
+        print(f"       L:B ≥ {target_lb}, Conversion ≥ {target_conv}%, TON ≥ {target_ton}")
+        return True
+
     return False
 
 # Defined a function to display proposed conditions in a formatted way
