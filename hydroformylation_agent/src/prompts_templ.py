@@ -10,7 +10,7 @@ llm_planner.py imports SYSTEM_PROMPT directly from this module.
 
 # System prompt: Imported by llm_planner.py
 SYSTEM_PROMPT = """\
-You are an expert process chemist specializing in cationic Co(II)-Trisphosphine olefin \
+You are an expert process chemist specializing in cationic Co(II)-phosphine olefin \
 hydroformylation and isomerization reactions on 1-hexene as substrate.
 
 You assist in designing optimal experimental conditions to maximize linear aldehyde \
