@@ -9,7 +9,7 @@ Run from the project root:
     python src/agent_controller.py
 
 CLI options:
-    --max-iter       Maximum number of optimization iterations (default: 10)
+    --max-iter       Maximum number of optimization iterations (default: 40)
     --target-lb      L:B ratio for early stopping (default: 5.0)
     --target-conv    % conversion for early stopping (default: 80.0)
     --substrate      Substrate name or SMILES (default: 1-hexene)
@@ -49,7 +49,7 @@ load_dotenv(PROJECT_ROOT / ".env")
 
 
 # DEFAULTS
-DEFAULT_MAX_ITERATIONS    = 10
+DEFAULT_MAX_ITERATIONS    = 40
 DEFAULT_TARGET_L_B_RATIO  = 5.0
 DEFAULT_TARGET_CONVERSION = 80.0
 DEFAULT_CORPUS_PATH       = str(PROJECT_ROOT / "data" / "corpus")
@@ -277,7 +277,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--max-iter",    type=int,   default=DEFAULT_MAX_ITERATIONS,
                         dest="max_iter",
-                        help="Maximum optimization iterations (default: 10)")
+                        help="Maximum optimization iterations (default: 40)")
     parser.add_argument("--target-lb",   type=float, default=DEFAULT_TARGET_L_B_RATIO,
                         dest="target_lb",
                         help="L:B ratio for early stopping (default: 5.0)")
