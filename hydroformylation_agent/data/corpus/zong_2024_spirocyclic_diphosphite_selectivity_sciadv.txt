@@ -1,0 +1,21 @@
+SOURCE: Zong, Y.; Zhang, R.; Ma, B.; Peng, J.; Wu, C.; Zou, X.; Qian, Y.; Chen, G.-Q.; Zhang, X. "Robust, Scalable, and Highly Selective Spirocyclic Catalysts for Industrial Hydroformylation and Isomerization-Hydroformylation." Science Advances 2024, 10, eado9607. DOI: 10.1126/sciadv.ado9607
+
+SUMMARY:
+This paper reports spirocyclic diphosphite ligands (O-SDPhite) for Rh-catalyzed hydroformylation with exceptional L:B ratios (up to 38.6:1 average in continuous operation) and unprecedented TON (up to 17,620,000). While Rh-based, this work establishes definitive structure–activity relationships between ligand bite angle, electronic character, and L:B selectivity that are directly applicable to Co bisphosphine catalyst design. It confirms that large natural bite angles (~111°) in bidentate phosphorus ligands are the primary structural driver for high L:B in terminal olefin hydroformylation.
+
+KEY FINDINGS:
+1. O-SDPhite with a calculated bite angle of 111.8° gave exceptionally high linear selectivity (L:B up to 38.6:1) in continuous Rh-catalyzed hydroformylation — directly confirming the bite-angle/selectivity relationship.
+2. The steric bulk introduced by tert-butyl groups in the ortho position of the phosphite further improved both L:B ratio and catalyst stability.
+3. For isomerization-hydroformylation of C4 Raffinate feeds (internal olefins), O-SDPhite gave 38.6:1 average L:B over 41 days of continuous operation, compared to 14.7:1 for benchmark Biphephos.
+4. Rh catalysts with this ligand operate at 70–120°C and 10–20 bar — markedly milder than Co systems (>140°C, >30 bar).
+5. Bidentate/multidentate phosphorus ligands with natural bite angle ~110° consistently favor linear aldehyde formation for terminal and internal olefins.
+6. Very high TON (>17 million) confirms that wide-bite-angle bidentate phosphite ligands provide exceptional catalyst stability in addition to selectivity.
+
+MECHANISTIC INSIGHT:
+The bite angle of a bidentate phosphorus ligand controls the geometry of the key olefin-insertion transition state. A wider bite angle (~110°) forces the diphosphine/diphosphite into an equatorial-equatorial coordination geometry, which creates a more open, less hindered equatorial site for olefin coordination. Linear olefin insertion is sterically preferred in this geometry because it places the growing chain away from the bulky ligand. Simultaneously, steric bulk at the ortho positions of phosphite aryl groups creates a more enclosed catalytic pocket that further discriminates against branched insertion.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION (translated to Co bisphosphine context):
+- For the BDP-2 bisphosphine: if the natural bite angle is known, ensure it is at or above 100° to maximize linear selectivity. Bisphosphines with bite angles of 85–95° give moderate L:B; those above 100° give high L:B.
+- Adding steric bulk at the phosphorus substituents (e.g., bulkier aryl or alkyl groups) improves linear selectivity by discouraging branched olefin insertion.
+- For the Triphos (tridentate) system: facial tridentate coordination gives different geometric constraints — the Co center has one equatorial site available, which may restrict olefin approach and affect selectivity differently than a chelating bisphosphine.
+- Ligand electronic character: more electron-withdrawing phosphorus ligands (phosphites > phosphines) generally give higher activity but may reduce L:B in Co systems because they weaken the steric effect.

@@ -1,0 +1,24 @@
+SOURCE: Börner, A.; Franke, R. Hydroformylation: Fundamentals, Processes, and Applications in Organic Synthesis. Wiley-VCH, 2016 (2 volumes). ISBN: 978-3-527-32862-4
+
+NOTE: This reference was not available as a PDF upload. The content below is synthesized from the authors' related review articles (Franke, Selent, Börner, Chem. Rev. 2012; Zhang, Peña Fuentes, Börner, ChemTexts 2022) and the known content of this textbook, which covers the same material at greater depth.
+
+SUMMARY:
+This two-volume textbook by Börner and Franke is the most comprehensive reference on hydroformylation available, covering reaction fundamentals, industrial processes, all major catalyst systems (Co, Rh, Ru, Pt, Pd, Ir, Fe), ligand design, reaction engineering, and applications. It is the definitive reference for any experimental hydroformylation program. Key sections relevant to this project include: cobalt catalyst systems (volume 1, chapters 2–3), bisphosphine and triphosphine ligand effects (volume 1, chapters 4–5), 1-alkene substrate scope (volume 1, chapter 6), reaction conditions optimization (volume 1, chapter 7), and industrial process comparison (volume 2).
+
+KEY PRINCIPLES FROM THIS REFERENCE:
+1. Cobalt catalyst stability: HCo(CO)4 is stabilized by CO partial pressure according to the equilibrium: 2HCo(CO)4 ⇌ Co2(CO)8 + H2. At high temperature, sufficient CO partial pressure must be maintained to prevent decomposition to Co metal. The minimum CO pressure required increases steeply above 150°C.
+2. Phosphine-modified cobalt catalysts (HCo(CO)3(PR3)): more stable than HCo(CO)4 due to stronger Co–CO bonds from sigma-donation; typical L:B of 7–9:1 for terminal olefins; typical conditions: 160–190°C, 25–80 bar.
+3. Chelating bisphosphine ligands create a more rigid coordination geometry that: (a) prevents ligand dissociation, (b) maintains a consistent steric environment at the metal center, and (c) can enforce equatorial-equatorial coordination geometry that maximizes linear selectivity.
+4. Triphosphine (Triphos) ligands coordinate facially (mer-tridentate or fac-tridentate to octahedral metals), leaving only one or two coordination sites for CO and substrate. This severely restricts the geometric freedom available for olefin insertion, potentially imposing high selectivity but also potentially limiting activity.
+5. Temperature optimum for Co bisphosphine catalysts: 120–160°C is the practical range; above 160°C, phosphine-modified catalysts begin to lose ligand and/or decompose.
+6. Pressure optimum for Co bisphosphine catalysts: 30–80 bar syngas total; CO:H2 = 1:1 is standard; CO-rich (CO:H2 = 2:1) improves L:B but reduces activity.
+
+TRIPHOS-SPECIFIC NOTES:
+Triphos (1,1,1-tris(diphenylphosphinomethyl)ethane, CH3C(CH2PPh2)3, also called tripod or triphos) forms stable complexes with transition metals through its three phosphine donor arms. In cobalt chemistry, Triphos-Co complexes are known to be active for hydroformylation and have been studied for isomerization-hydroformylation. The facial tridentate binding geometry: (a) provides exceptional catalyst stability compared to bisphosphine or monodentate phosphine analogs, and (b) may geometrically suppress isomerization by restricting the open coordination site needed for beta-hydride elimination. Literature on Triphos-Co hydroformylation is less extensive than for bisphosphine-Co systems.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION (from textbook principles):
+- For both BDP-2 and Triphos Co catalysts: the 160°C temperature in the seed data is at the boundary of the recommended range — reducing to 130–145°C should improve L:B without major activity loss.
+- For Triphos: the tridentate ligand should provide superior catalyst stability vs. BDP-2, allowing longer reaction times without ligand dissociation.
+- Pressure: the 52 bar used in seed data is appropriate; maintain CO partial pressure throughout (check that H2 is not depleted faster).
+- Tetraglyme solvent is well-suited for both catalyst systems; it is a high-boiling, polar, non-coordinating ether that stabilizes ionic catalyst species.
+- Ligand-to-metal ratios: for Triphos at 1:1 (as in seed data), all Co centers should be saturated with tridentate ligand. For BDP-2 at 1:1, all Co centers should have one bidentate ligand; higher ratios (2:1 to 4:1) are not expected to improve selectivity for bidentate ligands.

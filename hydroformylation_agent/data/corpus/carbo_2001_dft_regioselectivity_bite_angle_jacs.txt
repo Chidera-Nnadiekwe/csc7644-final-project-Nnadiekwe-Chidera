@@ -1,0 +1,26 @@
+SOURCE: Carbó, J. J.; Maseras, F.; Bo, C.; van Leeuwen, P. W. N. M. "Unraveling the Origin of Regioselectivity in Rhodium Diphosphine Catalyzed Hydroformylation. A DFT QM/MM Study." Journal of the American Chemical Society 2001, 123, 7630–7637. DOI: 10.1021/ja010324s
+
+SUMMARY:
+This computational QM/MM study systematically separates the contributions of bite angle (orbital effects) and steric nonbonding interactions (from PPh2 substituents) on regioselectivity in Rh diphosphine hydroformylation. The study uses Xantphos-type ligands with varying bite angles and resolves that nonbonding steric interactions between the diphenylphosphino groups and the olefin substrate — not the bite angle per se — are the dominant factor controlling L:B selectivity. The conclusions are directly applicable to understanding how Co bisphosphine and Triphos ligand geometry affects L:B in this project.
+
+KEY FINDINGS:
+1. Regioselectivity in Rh diphosphine hydroformylation is governed primarily by nonbonding interactions between the PPh2 substituents of the diphosphine and the olefin substrate in the transition state — not by the bite angle directly.
+2. The bite angle modulates steric effects indirectly: a wider bite angle places the two phosphorus substituents in positions that create larger steric discrimination between linear and branched olefin insertion TS geometries.
+3. Eight distinct reaction pathways were characterized at the DFT level from the key equatorial-equatorial [HRh(CO)(alkene)(diphosphine)] intermediate; the lowest-energy pathway for each diphosphine reproduced experimental L:B trends.
+4. Orbital effects (electronic contributions purely from bite angle) are smaller than the steric nonbonding contributions to regioselectivity for all studied ligands.
+5. Less basic (more pi-accepting) phosphines give higher L:B and higher activity — consistent with the Franke review.
+6. Larger bite angle + bulkier phosphine substituents = highest L:B selectivity. This is the design principle for both Bisbi and Xantphos in commercial Rh catalysis.
+
+MECHANISTIC INSIGHT:
+The key intermediate controlling regioselectivity is the equatorial-equatorial HM(CO)(alkene)(bisphosphine) complex, which can proceed to eight TS structures depending on whether alkene insertion is linear or branched and which geometric arrangement is adopted. Bulky PPh2 groups force the growing alkyl chain into the less hindered equatorial position, which corresponds to linear insertion. For Co bisphosphine systems, the same geometric arguments apply: Ph2P-Co-PPhPh with a wide bite angle will favor the equatorial linear insertion TS, explaining why DPPBz and similar chelating bisphosphines with bite angles near 90–100° improve L:B.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- To improve L:B for BDP-2 bisphosphine Co catalyst: consider whether the Ph groups on phosphorus are providing adequate steric discrimination. Larger aryl or o-substituted aryl groups would be more selective.
+- Ligand bite angle is a proxy for steric environment at the metal center — use it as a screening criterion when choosing bisphosphine variants.
+- More pi-accepting (less electron-donating) bisphosphines can simultaneously improve L:B and activity in both Rh and Co systems.
+- For the Triphos (tridentate, facial) Co system: the facial tridentate geometry constrains the available coordination space very differently than an equatorial-equatorial bisphosphine; DFT analogies suggest reduced geometric flexibility may lock the system into a more specific transition state geometry.
+- Ligand modifications that increase steric bulk at the 2,6 (ortho) positions of PPh2 aryl groups are predicted to improve L:B without necessarily changing bite angle.
+
+DEVON ET AL. PATENT NOTE (supplementary):
+Devon, T. J.; Phillips, G. W.; Puckette, T. A.; Stavinoha, J. L.; Vanderbilt, J. J. U.S. Patent 4,694,109 (Eastman Kodak), 1987.
+This patent introduced Bisbi (2,2'-bis(diphenylphosphinomethyl)-1,1'-biphenyl), a chelating bisphosphine with natural bite angle ~113°, for highly regioselective Rh-catalyzed hydroformylation with L:B ratios well above 10:1 at low syngas pressure. Bisbi established the practical bite-angle/selectivity relationship in industrial bisphosphine Rh catalysis. Its wide bite angle (~113°) maximizes equatorial-equatorial coordination and maximizes the steric discrimination between linear and branched olefin insertion, consistent with the Carbó et al. computational study above. BDP-2 ligands with similar geometries can be expected to exhibit analogous, though smaller-magnitude, selectivity benefits in the Co system.

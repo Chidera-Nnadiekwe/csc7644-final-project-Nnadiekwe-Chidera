@@ -1,0 +1,22 @@
+SOURCE: Zhang, B.; Kubis, C.; Franke, R. "Hydroformylation Catalyzed by Unmodified Cobalt Carbonyl under Mild Conditions." Science 2022, 377, 1223–1227. DOI: 10.1126/science.abm4465
+
+SUMMARY:
+This paper reports that unmodified HCo(CO)4 — long assumed to be unstable below 50 bar at 140°C — can in fact catalyze hydroformylation of 1-hexene and 1-octene under mild conditions (140°C, 50 bar, 1:1 H2:CO) with activity comparable to the cationic Co(II) bisphosphine system of Stanley. The work arose from an attempt to reproduce the Hood et al. 2020 results and instead found that Co(acac)2 precursor (without any bisphosphine ligand) under the same conditions generated active HCo(CO)4 in situ. This paper sparked the purity debate addressed by Holzknecht et al. 2024. It also provides useful data on solvent effects and temperature effects on Co-catalyzed 1-hexene hydroformylation.
+
+KEY FINDINGS:
+1. Unmodified HCo(CO)4 generated in situ from Co(acac)2, Co2(CO)8, or other Co precursors is stable and active at 140°C under 30–50 bar syngas — significantly lower than the classical >100 bar process.
+2. For 1-hexene in tetraglyme at 140°C, 50 bar, 1 mM Co: conversion reached 60–70% and n-selectivity (L:B) was similar to the Stanley cationic Co system under the same conditions.
+3. Lower temperature favors higher linear selectivity in polar solvents (1,4-dioxane): optimal for L:B improvement was below 140°C.
+4. Adding bisphosphine ligands at low P:Co ratios (<0.6) had a small promotional effect on activity but did not dramatically alter selectivity.
+5. Branched internal olefins were converted to linear aldehydes with high regioselectivity at low syngas pressure, attributed to the high isomerization activity of HCo(CO)4.
+6. Tetraglyme was the preferred solvent for activity; toluene and THF gave dramatically lower conversion, consistent with the seed data in this project.
+
+MECHANISTIC INSIGHT:
+The stability of HCo(CO)4 under mild conditions is attributed to the equilibrium between HCo(CO)4 and Co2(CO)8 — at sufficiently high CO partial pressure and moderate temperature, the cobalt tetracarbonyl hydride is thermodynamically stabilized. Decomposition to cobalt metal is kinetically suppressed at 140°C under 30–50 bar CO partial pressure. The high isomerization activity means internal olefins re-enter the hydroformylation cycle, reducing overall n-selectivity. Solvent polarity and coordination ability strongly affect catalyst stability and turnover.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- Tetraglyme is strongly preferred over toluene, THF, or other non-polar solvents for Co-catalyzed hydroformylation of 1-hexene at mild conditions — conversion differences are dramatic (60%+ in tetraglyme vs. <10% in toluene).
+- Lower reaction temperatures (below 140°C) can improve linear selectivity at the expense of activity.
+- CO partial pressure must be maintained to prevent catalyst decomposition — ensure the CO:H2 ratio does not drift CO-lean during the reaction.
+- At P:Co ratios below 0.6, bisphosphine addition has minimal effect on catalysis — meaningful ligand effects require higher loading.
+- If unexpected high activity is observed without ligand, consider whether HCo(CO)4 formation from Co salt impurities or decomposition pathways is contributing.

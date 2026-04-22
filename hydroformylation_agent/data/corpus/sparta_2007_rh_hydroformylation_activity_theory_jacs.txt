@@ -1,0 +1,22 @@
+SOURCE: Sparta, M.; Børve, K. J.; Jensen, V. R. "Activity of Rhodium-Catalyzed Hydroformylation: Added Insight and Predictions from Theory." Journal of the American Chemical Society 2007, 129, 8487–8499. DOI: 10.1021/ja070395n
+
+SUMMARY:
+This DFT study examines the hydroformylation activity of mono-substituted HRh(CO)3L catalysts across a range of ligand types (phosphites, phosphines, N-heterocyclic carbenes) and derives structure-activity relationships for catalytic rate. The key finding is that strong pi-accepting ligands (low electron-donating capacity) increase catalyst activity by reducing the barrier to key insertion steps. While Rh-based, the electronic principles are directly applicable to Co bisphosphine catalysis — particularly the role of ligand pi-acceptance in controlling CO dissociation and olefin insertion barriers.
+
+KEY FINDINGS:
+1. Stronger pi-accepting ligands (phosphites > phosphines, in terms of pi-acceptor strength) systematically reduce the ethylene insertion barrier from the HRh(CO)2L resting state.
+2. More pi-accepting ligands increase CO stretching frequencies (νCO) due to reduced backbonding, which is a measurable electronic descriptor for catalyst activity prediction.
+3. Less electron-donating ligands give higher activity — a consistent trend across phosphites, phosphines, and NHC ligands.
+4. The rate-determining step can shift between CO dissociation and olefin insertion depending on the ligand, as both barriers are affected in opposite directions by ligand pi-acceptance.
+5. Phosphites are systematically more pi-accepting and give higher activity than arylphosphines under comparable conditions. This has been verified experimentally.
+6. NHC ligands can be tuned to give very high pi-acceptance, suggesting potential for highly active future catalysts.
+
+MECHANISTIC INSIGHT:
+Pi-accepting ligands reduce electron density on the metal center, weakening M–CO bonds (facilitating CO dissociation) and lowering the olefin coordination/insertion barrier. For Co bisphosphine catalysts, moderately pi-accepting bisphosphine ligands would be predicted to give higher activity than strongly electron-donating bisphosphines (e.g., dialkylphosphines). The BDP-2 bisphosphine (diphenylphosphino groups) is moderately electron-donating relative to phosphites but more pi-accepting than dialkylphosphines, placing it in an intermediate activity range. The Triphos ligand (three PPh2 groups) is similarly moderate in electron donation.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- For improving activity in the Co bisphosphine system: consider moving toward more electron-withdrawing substituents on phosphorus (e.g., p-CF3-phenyl groups) while maintaining the bisphosphine chelate structure.
+- The CO stretching frequency in the IR spectrum of the catalyst complex is a useful in situ descriptor: higher νCO correlates with higher predicted activity.
+- Avoid strongly electron-donating bisphosphines (e.g., dcpe, dialkylphosphines) if activity is the priority — these stabilize the catalyst at the cost of making CO dissociation prohibitively slow.
+- For the Triphos system: the three PPh2 groups provide moderate electron donation; if L:B is acceptable but activity is low, consider whether a more pi-accepting variant of Triphos would help.
+- Electronic effects on regioselectivity: more pi-accepting ligands generally give higher L:B for the same steric environment, because the reduced Co electron density favors the linear insertion pathway electrostatically.

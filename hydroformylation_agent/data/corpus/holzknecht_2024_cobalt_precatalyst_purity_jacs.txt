@@ -1,0 +1,22 @@
+SOURCE: Holzknecht, D. R.; Van Alstine, A. K.; Russell, B. P.; Vinyard, D. J.; Donnarumma, F.; Chambers, M. B. "Revisiting the Preparation and Catalytic Performance of a Phosphine-Modified Co(II) Hydroformylation Precatalyst." Journal of the American Chemical Society 2024, 146, 19183–19192. DOI: 10.1021/jacs.4c04239
+
+SUMMARY:
+This paper critically re-examines the synthesis and purity of [Co(acac)(dppBz)](BF4) (the dppBz = DPPBz bisphosphine Co(II) precatalyst from Hood et al. 2020), in light of conflicting reports about the reproducibility of cationic Co(II) hydroformylation results. The study finds that incomplete protonolysis during synthesis produces a neutral Co(acac)2(dppBz) impurity that dramatically degrades catalytic performance. Revised synthesis procedures yield analytically pure precatalyst confirmed active for 1-hexene hydroformylation at 51.7 bar, 140°C. Highly relevant to experimental reproducibility and precatalyst quality control for both BDP-2 and Triphos Co systems.
+
+KEY FINDINGS:
+1. Standard synthesis of [Co(acac)(dppBz)](BF4) from Co(acac)2 and dppBz with HBF4 can produce significant quantities of neutral Co(acac)2(dppBz) impurity due to incomplete protonolysis of the second acac group.
+2. The impurity Co(acac)2(dppBz) dramatically decreases hydroformylation activity — even small amounts of this neutral species deactivate the system.
+3. ESI-TOF mass spectrometry was identified as the most reliable method to confirm precatalyst purity and distinguish [Co(acac)(dppBz)]+ from Co(acac)2(dppBz).
+4. Revised synthesis using lower temperature and extended reaction times eliminates the impurity and gives analytically pure [Co(acac)(dppBz)](BF4).
+5. Pure [Co(acac)(dppBz)](BF4) shows confirmed hydroformylation activity for 1-hexene at 51.7 bar and 140°C, validating the cationic Co(II) bisphosphine catalyst concept.
+6. This work resolves the controversy raised by Zhang et al. (Science 2022) regarding reproducibility of the Stanley group results.
+
+MECHANISTIC INSIGHT:
+The neutral Co(acac)2(dppBz) impurity poisons or competes with the active cationic [HCo(CO)x(dppBz)]+ species. The neutral Co(II) bis(acac) complex does not generate active HCo(CO)4-type species under the mild conditions used for the cationic catalyst, so it acts as a catalytically dead sink for Co and ligand. This highlights that precatalyst purity is critical in cationic Co(II) hydroformylation — impurities at even low levels (detectable only by ESI-MS) can significantly suppress activity and make results irreproducible.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- Always verify precatalyst purity by ESI-TOF MS before use; NMR alone may not detect Co(acac)2(bisphosphine) impurities at problematic levels.
+- Use lower temperature conditions and longer reaction times during precatalyst synthesis to ensure complete protonolysis of both acac groups.
+- Consistent precatalyst batches are essential for reproducible catalytic outcomes — batch-to-batch variability in [Co(acac)(bisphosphine)](BF4) synthesis is a significant source of irreproducible hydroformylation results.
+- If poor activity is observed unexpectedly, suspect precatalyst impurity before attributing the result to the reaction conditions.
+- Conditions confirmed for pure precatalyst: 140°C, 51.7 bar (750 psi), 1:1 H2:CO, tetraglyme solvent, 1-hexene substrate.

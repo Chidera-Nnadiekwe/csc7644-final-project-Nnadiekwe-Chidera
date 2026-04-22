@@ -1,0 +1,24 @@
+SOURCE: Franke, R.; Selent, D.; Börner, A. "Applied Hydroformylation." Chemical Reviews 2012, 112, 5675–5732. DOI: 10.1021/cr3001803
+
+SUMMARY:
+This is the most comprehensive review of industrial and applied hydroformylation available, covering catalyst systems (Co and Rh), ligand design principles, reaction conditions, substrate scope, decomposition pathways, and industrial processes. It is an essential reference for understanding how reaction variables (temperature, pressure, CO:H2 ratio, ligand structure) affect activity and regioselectivity across the major catalyst classes. The sections on cobalt catalysis, bisphosphine ligands, and substrate effects on C5–C10 alpha-olefins are directly relevant to the optimization of 1-hexene hydroformylation with Co bisphosphine catalysts.
+
+KEY FINDINGS:
+1. For cobalt-catalyzed hydroformylation, increasing CO partial pressure inhibits isomerization (by blocking beta-hydride elimination) and improves L:B selectivity. This is the opposite trend to activity (higher CO slows catalysis by blocking substrate coordination).
+2. Phosphine-modified Co catalysts (HCo(CO)3(PR3)) operate at lower pressure (25–100 bar) and give higher L:B (typically 7–9:1) than unmodified HCo(CO)4, but require higher temperatures (~180–200°C) and suffer from reduced activity.
+3. For 1-hexene hydroformylation with phosphine-modified Co, the L:B ratio is strongly ligand-dependent: bulkier, more electron-donating alkylphosphines give higher L:B; arylphosphines (PPh3) give lower L:B but higher activity.
+4. Bidentate bisphosphine ligands with wide natural bite angles (>100°) strongly favor linear aldehyde formation for terminal olefins by imposing steric preference for linear olefin insertion.
+5. Solvent effects: polar solvents (tetraglyme, propylene carbonate, NMP) stabilize cationic or ionic catalyst species and generally give better performance for Co systems than non-polar solvents.
+6. CO:H2 ratio: 1:1 is generally optimal for combined activity and selectivity; CO-rich conditions (CO:H2 > 1) suppress isomerization and improve L:B but reduce activity; H2-rich conditions (H2:CO > 1) increase activity and favor alcohol/alkane formation.
+7. Temperature effects: higher temperature increases activity but decreases L:B selectivity for most Co systems due to enhanced isomerization.
+
+MECHANISTIC INSIGHT:
+In the Heck-Breslow mechanism, the rate-determining step for most Co systems is CO dissociation or olefin coordination. Regioselectivity is determined at the olefin insertion step: linear insertion of the terminal olefin into the Co–H bond is sterically favored by bulky ligands. High CO pressure inhibits isomerization by competing with beta-hydride elimination at the alkyl-Co intermediate. Chelating bisphosphines prevent ligand dissociation and maintain consistent steric environment, whereas monodentate ligands can dissociate at high temperature, generating less selective unligated Co species.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- For maximum L:B with Co bisphosphine catalysts, use CO:H2 ratios of 1:1 to 2:1 (CO-rich) and moderate temperature (100–140°C).
+- Ligand:Co ratios of 2:1 to 6:1 are generally optimal; excess ligand can inhibit catalysis by blocking coordination sites.
+- Pressure between 30 and 80 bar is the practical range for bisphosphine-modified Co; below 20 bar the catalyst may decompose.
+- Tetraglyme and other polyether solvents are preferred for Co bisphosphine systems based on solubility and stabilization data.
+- Reaction times of 1–6 hours are typical for batch autoclave experiments with terminal olefins at 140–160°C.
+- Monitor for alcohol formation (sign of over-reduction) and alkane formation (sign of hydrogenation side reaction) as indicators of suboptimal H2:CO ratio or temperature.

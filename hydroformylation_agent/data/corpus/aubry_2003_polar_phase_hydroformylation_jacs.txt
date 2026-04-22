@@ -1,0 +1,25 @@
+SOURCE: Aubry, D. A.; Bridges, N. N.; Ezell, K.; Stanley, G. G. "Polar Phase Hydroformylation: The Dramatic Effect of Water on Mono- and Dirhodium Catalysts." Journal of the American Chemical Society 2003, 125, 11180–11181. DOI: 10.1021/ja035926w
+
+SUMMARY:
+This communication from the Stanley group at LSU reports that adding 30% water (by volume) to acetone as solvent produces dramatic rate enhancements (30–265%) for the hydroformylation of 1-hexene with a range of Rh phosphine catalysts, including the dirhodium tetraphosphine catalyst and monometallic Rh/PPh3, Rh/Bisbi, Rh/Naphos, and Rh/Xantphos systems. Though Rh-based, this is directly relevant to understanding solvent polarity effects on hydroformylation activity and selectivity, especially for the Co bisphosphine system where tetraglyme (a polar, coordinating solvent) is the best performer.
+
+KEY FINDINGS:
+1. Adding 30% water to acetone gave 30–115% rate enhancement for monometallic Rh catalysts (PPh3, Bisbi, Naphos, Xantphos) for 1-hexene hydroformylation at 90°C, 6.2 bar, 1:1 H2:CO.
+2. The dirhodium tetraphosphine catalyst [rac-Rh2(et,ph-P4)]2+ showed a 265% rate increase with 30% water in acetone, with L:B ratio of 33:1 and essentially no isomerization (<0.2%).
+3. In pure acetone, the dirhodium catalyst gave L:B = 25:1 and initial TOF = 20 min-1 vs. L:B = 33:1 and TOF = 73 min-1 with 30% water — showing that polar solvent environment improves both activity and selectivity simultaneously.
+4. Water-sensitive phosphite ligands (e.g., Billig bisphosphite from Union Carbide) cannot be used in aqueous systems due to hydrolysis.
+5. The effect is attributed to increased polarity stabilizing the cationic or polar transition states in hydroformylation.
+
+MECHANISTIC INSIGHT:
+Polar solvents (water, acetone/water mixtures, tetraglyme) stabilize cationic or charge-separated transition states in the catalytic cycle, lowering the activation barrier for rate-determining steps. For cationic Co(II) bisphosphine systems, where the metal center carries a permanent positive charge, this effect should be pronounced — polar solvents stabilize the charged catalyst resting state and may lower the barrier for CO dissociation (a likely rate-limiting step). This provides mechanistic justification for why tetraglyme dramatically outperforms toluene, THF, and anisole in the seed data for both BDP-2 and Triphos catalysts.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- Polar, coordinating solvents are strongly preferred for cationic Co(II) bisphosphine hydroformylation — tetraglyme is the current best solvent based on experimental data.
+- Increased solvent polarity generally improves both activity and selectivity for ionic/cationic transition-metal hydroformylation catalysts.
+- Non-coordinating non-polar solvents (toluene) are strongly disfavored for the Co bisphosphine system — this is confirmed by near-zero conversion in toluene in the Triphos seed data.
+- If switching solvents, prioritize polar, Lewis-basic solvents: tetraglyme > anisole > THF >> toluene, based on experimental data in this project.
+- Water addition to polar solvents might further enhance activity for Co bisphosphine systems, though hydrolysis sensitivity of the precatalyst should be checked first.
+
+SLAUGH AND MULLINEAUX PATENT NOTE (supplementary):
+Slaugh, L. H.; Mullineaux, R. D. U.S. Patent 3,239,566 (Shell Oil Company), 1966.
+This foundational patent established that HCo(CO)3(PR3) with trialkylphosphines (e.g., Bu3P) operates at lower pressure (4–8 MPa = 40–80 bar) and gives higher L:B ratios than unmodified HCo(CO)4, with direct hydrogenation of aldehyde to alcohol as a side reaction. The electron-donating alkylphosphine stabilizes the Co center via increased sigma-donation, reducing CO partial pressure requirements. This is the historical foundation for all phosphine-modified Co hydroformylation catalysis, including the cationic Co(II) bisphosphine system.

@@ -1,0 +1,23 @@
+SOURCE: Hood, D. M.; Johnson, R. A.; Vinyard, D. J.; Fronczek, F. R.; Stanley, G. G. "Cationic Cobalt(II) Bisphosphine Hydroformylation Catalysis: In Situ Spectroscopic and Reaction Studies." Journal of the American Chemical Society 2023, 145, 19715–19726. DOI: 10.1021/jacs.3c04866
+
+SUMMARY:
+This paper provides detailed in situ infrared (IR), EPR, and NMR spectroscopic characterization of the active [HCo(CO)x(bisphosphine)](BF4) (x = 1–3) catalyst system first reported in Science 2020. It confirms the Co(II) oxidation state and the mononuclear catalyst formulation, and identifies a paramagnetic CO-bridged dicationic Co(I) dimer that forms at lower temperatures. It also presents reaction studies that minimize the contribution of neutral Co(I) species (HCo(CO)4, HCo(CO)3(phosphine)) to catalysis, confirming the cationic Co(II) bisphosphine as the operative catalyst. Directly relevant to the BDP-2 catalyst system in this project.
+
+KEY FINDINGS:
+1. In situ IR studies under catalytic conditions confirm formation of [HCo(CO)x(bisphosphine)]+ species as the active catalyst, with CO stretching frequencies substantially higher than neutral Co(I) hydrides, consistent with reduced pi-backbonding.
+2. At lower temperatures, a paramagnetic CO-bridged dimer [Co2(mu-CO)2(CO)(bisphosphine)2]2+ forms from two catalyst units via elimination of H2. This dimer is analogous to the HCo(CO)4/Co2(CO)8 equilibrium in classical cobalt chemistry.
+3. EPR studies confirm a high-spin Co(II) center (S = 3/2) in the resting state of the catalyst precursor.
+4. DFT calculations support a dimer structure with square-pyramidal and tetrahedral cobalt centers.
+5. Reaction studies with controlled experiments minimized HCo(CO)4 and HCo(CO)3(phosphine) as competing active catalysts, supporting cationic Co(II) as the primary catalytic species.
+6. The monomer–dimer equilibrium is temperature-dependent; higher temperatures shift the equilibrium toward the active mononuclear catalyst.
+
+MECHANISTIC INSIGHT:
+The active catalyst is a mononuclear cationic Co(II) hydridocarbonyl bisphosphine complex. The positive charge reduces pi-backbonding to CO, weakening M–CO bonds and enabling CO dissociation at lower partial pressures than classical Co(I) systems. A competing dimer forms at lower temperatures via H2 elimination, which may sequester catalyst and reduce activity. This suggests that conditions favoring monomer — higher temperature, higher CO pressure — are beneficial for maintaining catalyst activity. The bisphosphine chelate prevents ligand dissociation under reaction conditions, unlike monodentate phosphine-modified Co systems.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- Operate at sufficiently high temperatures (>120°C) to suppress dimer formation and maintain mononuclear active catalyst concentration.
+- Higher CO partial pressure stabilizes the active mononuclear hydridocarbonyl species.
+- The chelating bisphosphine (bidentate) is essential — it prevents ligand loss that would convert cationic Co(II) to inactive neutral Co species.
+- Use preformation conditions (heating the precatalyst under syngas before adding substrate) to ensure complete activation to the active hydridocarbonyl form.
+- For BDP-2 type bisphosphine ligands, the bite angle and donor strength of the phosphine are key variables controlling activity and selectivity.
+- Avoid extended reaction times at low temperature (<100°C) as dimer accumulation may deactivate the catalyst.

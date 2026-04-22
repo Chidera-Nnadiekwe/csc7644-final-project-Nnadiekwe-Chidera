@@ -1,0 +1,20 @@
+SOURCE: Smart, J. E.; Emerson-King, J.; Jeans, R. J.; Hood, T. M.; Lau, S.; Bara-Estaún, A.; Hintermair, U.; Pringle, P. G.; Chaplin, A. B. "A Resorcin[4]arene-Based Phosphite-Phosphine Ligand for the Branched-Selective Hydroformylation of Alkyl Alkenes." ACS Catalysis 2024, 14, 11803–11807. DOI: 10.1021/acscatal.4c02986
+
+SUMMARY:
+This paper reports a chelating phosphite-phosphine ligand (JEKphos) based on a tris(quinoxaline)-extended resorcin[4]arene cavitand scaffold, applied to Rh-catalyzed hydroformylation of terminal alkyl alkenes (including 1-octene) with branched selectivity (b/l = 5.9 at 60°C, 20 bar 1:1 H2:CO). While the goal is branched selectivity — opposite to linear selectivity sought in this project — it provides important mechanistic context: specifically, how ligand structure and the catalytic pocket geometry control whether linear or branched aldehyde is favored. Relevant as a counterexample and mechanistic contrast to the linear-selective systems used in this project.
+
+KEY FINDINGS:
+1. A Rh complex of JEKphos (phosphite-phosphine with bite angle 82.16°) gives branched-selective hydroformylation of 1-octene: b/l = 5.9 at 60°C, 20 bar 1:1 H2:CO.
+2. The rhodium center is encapsulated within the resorcin[4]arene cavity, creating a confined catalytic environment that specifically disfavors the less hindered linear insertion transition state.
+3. Bite angle of 82.16° is in the range that gives moderate-to-low linear selectivity for standard diphosphine Rh catalysts — confirms that narrower bite angles favor branched products.
+4. At 60°C and 20 bar: mild conditions sufficient for Rh-catalyzed hydroformylation, very different from Co conditions.
+5. The phosphite-phosphine heteroligand gives different electronic properties at each phosphorus: one pi-acceptor (phosphite), one sigma-donor (phosphine), creating an asymmetric electronic environment.
+
+MECHANISTIC INSIGHT (relevance to linear selectivity):
+This paper confirms by contrast that: (a) wide bite angle bisphosphines with both donors equivalent (bis-phosphine or bis-phosphite) give linear selectivity, while (b) narrow bite angle or asymmetric phosphite-phosphine ligands favor branched selectivity. For the Co bisphosphine system targeting linear selectivity, the lesson is that bite angle above ~95° is important, and symmetric donor atoms (both PPh2) are preferred over mixed phosphite-phosphine systems. The encapsulation effect (confined cavity) in JEKphos generates the branched selectivity — an open, less constrained coordination environment around Co in BDP-2 and Triphos is consistent with targeting linear products.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- The narrow bite angle (82°) of JEKphos gives branched selectivity — for linear selectivity with Co bisphosphine, maintain bite angle above 95°.
+- Symmetric bis(phosphine) ligands favor linear products over mixed phosphite-phosphine ligands for terminal olefin substrates.
+- Low temperature (60°C in this Rh example) is effective at suppressing isomerization for Rh systems; for Co bisphosphine systems, analogous temperature reduction (to ~120°C) should improve L:B.
+- Ligand confinement effects (cavitand, encapsulating scaffolds) are not relevant to the current BDP-2/Triphos system but confirm that the geometric relationship between catalyst and substrate at the active site is the primary selectivity lever.

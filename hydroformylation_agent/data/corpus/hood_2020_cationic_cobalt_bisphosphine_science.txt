@@ -1,0 +1,27 @@
+SOURCE: Hood, D. M.; Johnson, R. A.; Carpenter, A. E.; Younker, J. M.; Vinyard, D. J.; Stanley, G. G. "Highly Active Cationic Cobalt(II) Hydroformylation Catalysts." Science 2020, 367, 542–548. DOI: 10.1126/science.aaw7742
+
+SUMMARY:
+This landmark paper reports a new class of cationic Co(II) chelating bisphosphine catalysts, [Co(acac)(bisphosphine)](BF4), that are highly active for the hydroformylation of terminal and internal olefins, including 1-hexene, under mild conditions relative to classical cobalt systems. The catalyst operates via a Co(II) oxidation state rather than the classical Co(I) mechanism, enabling activity at significantly lower CO partial pressures. This is the foundational reference for the cationic Co(II) bisphosphine system used in this project.
+
+KEY FINDINGS:
+1. The monometallic precursor [Co(acac)(DPPBz)](BF4) was more active than the dicobalt complexes for hydroformylation of 1-hexene at 50 bar and 140–170°C.
+2. Activity increased with temperature up to 170°C at 50 bar 1:1 H2:CO; above 170°C catalyst decomposition commenced.
+3. High alkene isomerization activity was observed throughout, similar to Co(I) systems; this results in low L:B selectivity for aldehyde products as the catalyst also hydroformylates internal alkenes formed by isomerization.
+4. Maximum isomerization occurred at high temperature and low pressure (160°C, 30 bar); suppressing isomerization requires higher CO partial pressure.
+5. CO pressure effect: as H2:CO pressure increased from 30 to 50 bar, both activity (TOF) and conversion improved. The initial TOF was pressure-dependent in a non-linear way.
+6. Alcohol byproduct formation occurred at higher temperatures (160°C) and in the 30–60 bar regime with more electron-donating bisphosphine ligands, particularly once aldehyde concentration built up.
+7. Alkane formation from alkene hydrogenation was typically below 3%.
+8. The system showed unusually broad functional group tolerance compared to classical HCo(CO)4, attributed to the cationic character of the cobalt center.
+
+MECHANISTIC INSIGHT:
+The cationic Co(II) bisphosphine system operates with a reduced propensity for CO back-donation compared to neutral Co(I) analogs (HCo(CO)4, HCo(CO)3(PR3)), because the positive charge on Co diminishes electron density available for M–CO pi-backbonding. This weakens the Co–CO bond, facilitating CO dissociation and enabling activity at lower CO pressures than classical systems. The olefin insertion step controls regioselectivity: linear insertion into the Co–H bond gives n-alkyl intermediates (linear aldehyde), while branched insertion gives iso-alkyl intermediates (branched aldehyde). The high isomerization activity of cationic Co arises from facile beta-hydride elimination enabled by the weakened Co–CO interaction. Because internal olefins can coordinate and hydroformylate, high isomerization leads to a statistical mixture of aldehyde regioisomers and low L:B.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- Use chelating bisphosphine ligands; DPPBz (1,2-bis(diphenylphosphino)benzene) gave the best activity in this study.
+- Operate at 50 bar syngas pressure for a good balance of activity and selectivity; 30 bar is workable but gives higher isomerization.
+- 1:1 H2:CO ratio is recommended; CO-rich conditions suppress isomerization and improve L:B.
+- Optimal temperature window is 140–160°C; 170°C approaches decomposition threshold.
+- Catalyst loadings in the 0.1–1.0 mol% range vs. substrate are effective.
+- Tetraglyme is cited as an effective solvent; polar coordinating solvents stabilize the cationic Co center.
+- Avoid conditions that accumulate high aldehyde concentrations at high temperature and moderate pressure, as this promotes unwanted alcohol formation.
+- The monometallic [Co(acac)(bisphosphine)](BF4) precursor outperforms dicobalt variants — use mononuclear precatalyst.

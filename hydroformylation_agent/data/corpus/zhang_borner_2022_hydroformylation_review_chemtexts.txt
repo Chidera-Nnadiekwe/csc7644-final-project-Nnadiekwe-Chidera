@@ -1,0 +1,22 @@
+SOURCE: Zhang, B.; Peña Fuentes, D.; Börner, A. "Hydroformylation." ChemTexts 2022, 8, 2. DOI: 10.1007/s40828-021-00154-x
+
+SUMMARY:
+This accessible review article covers the fundamentals of hydroformylation in a lecture-text format, including the historical development, mechanism (Heck-Breslow cycle), catalyst metals and ligands, ligand/catalyst stability, and substrate scope. It is particularly useful as a reference for the mechanistic principles governing cobalt- and rhodium-catalyzed hydroformylation, including the factors controlling L:B selectivity, catalyst decomposition, and syngas pressure effects.
+
+KEY FINDINGS:
+1. Hydroformylation is a cis-addition of H and CHO across the double bond; this stereochemical constraint limits the possible insertion geometries and directly influences regioselectivity.
+2. For Co catalysts: classical HCo(CO)4 requires 100–400 bar and 100–250°C; phosphine-modified HCo(CO)3(PR3) operates at 25–100 bar and 160–200°C; the new cationic Co(II) bisphosphine systems (Hood et al.) operate at 30–80 bar and 100–170°C.
+3. L:B selectivity for Co systems: unmodified HCo(CO)4 gives L:B of 3–4:1; phosphine-modified Co gives L:B of 7–9:1; cationic Co(II) bisphosphine gives L:B of 1–3:1 under standard conditions (due to high isomerization activity).
+4. Catalyst stability: Co catalysts decompose to Co metal at insufficient CO partial pressure; the threshold CO pressure increases with temperature. Higher temperature requires proportionally higher CO partial pressure to maintain catalyst stability.
+5. Ligand stability: phosphine ligands can undergo oxidation and other degradation pathways under reaction conditions; chelating bisphosphines are more resistant to oxidative degradation than monodentate phosphines.
+6. Syngas composition: CO inhibits isomerization and stabilizes the catalyst; H2 provides the hydride and drives the reductive elimination step. A 1:1 CO:H2 ratio is generally optimal for combined activity and selectivity.
+
+MECHANISTIC INSIGHT:
+The Heck-Breslow catalytic cycle for cobalt proceeds: (1) CO dissociation from HCo(CO)4 to give HCo(CO)3 (16-electron active species); (2) alkene coordination; (3) alkene insertion into Co–H (regioselectivity-determining step); (4) CO coordination; (5) migratory CO insertion (acyl formation); (6) H2 oxidative addition; (7) reductive elimination of aldehyde. For the cationic Co(II) system, step 1 is facilitated by the reduced electron density on Co (cationic charge reduces pi-backbonding), making CO dissociation easier at lower partial pressure. Steps 3 and 4 control both regioselectivity and the isomerization/hydroformylation competition.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- Monitor the CO partial pressure carefully during batch runs — CO is consumed in the reaction, and if CO is depleted faster than H2, the CO:H2 ratio drifts H2-rich, promoting catalyst decomposition and hydrogenation side reactions.
+- For Co bisphosphine systems at 160°C: ensure CO partial pressure is at least 20–25 bar throughout the run, not just at the start.
+- Increasing syngas pressure improves catalyst stability and selectivity simultaneously for Co systems.
+- Ligand-to-metal ratios: bidentate bisphosphines at 1:1 to 3:1 (ligand:Co) are sufficient; higher ratios waste ligand without benefit.
+- The temperature of 160°C used in the seed data for both BDP-2 and Triphos is at the upper end of the recommended range and may explain the observed low L:B — reducing temperature to 120–140°C at maintained 52 bar pressure is predicted to improve selectivity.

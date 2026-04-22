@@ -1,0 +1,22 @@
+SOURCE: Dingwall, P.; Fuentes, J. A.; Crawford, L. E.; Slawin, A. M. Z.; Bühl, M.; Clarke, M. L. "Understanding a Hydroformylation Catalyst that Produces Branched Aldehydes from Alkyl Alkenes." Journal of the American Chemical Society 2017, 139, 15921–15932. DOI: 10.1021/jacs.7b09164
+
+SUMMARY:
+This paper provides deep mechanistic investigation of Rh/BOBPHOS — a phospholane-phosphite heteroligand that is branched-selective for terminal alkyl alkenes. Through in situ HPIR kinetics, isotopic labeling, and DFT, it characterizes the active catalyst intermediates, identifies two turnover-determining steps, establishes negative CO order and positive H2 and alkene orders, and shows that olefin insertion into Rh–H is largely irreversible. As with Smart et al. 2024, the relevance here is as a mechanistic counterexample: understanding what drives branched selectivity in BOBPHOS clarifies by contrast what must be preserved or enhanced in the BDP-2 and Triphos Co systems to maintain and improve linear selectivity.
+
+KEY FINDINGS:
+1. Two steps are turnover-determining for Rh/BOBPHOS: one involving alkene and one involving H2 — the system is not cleanly rate-limited by a single step.
+2. Reaction orders: negative in CO (CO inhibits catalysis by occupying the active site), positive in alkene and H2. This confirms CO coordination is competitive with olefin coordination for the rate-determining step.
+3. Under single-turnover conditions, the ratio of branched to linear acyl intermediates directly mirrors the final aldehyde ratio, confirming selectivity is set at the olefin insertion step.
+4. Rh–H addition to the alkene is largely irreversible at high CO pressure (>5 bar for this system), meaning selectivity is kinetically controlled.
+5. CH–pi interactions between the BOBPHOS ligand phenyl groups and the substrate alkyl chain in the TS stabilize the branched insertion pathway specifically — a subtle but critical selectivity element.
+6. A 3D quadrant model for steric discrimination explains both regio- and enantioselectivity based on the four quadrants of steric space around the Rh center.
+
+MECHANISTIC INSIGHT (relevance to linear selectivity in Co systems):
+The CH–pi interaction in BOBPHOS that stabilizes the branched TS is absent or structurally disfavored in bisphosphine-Co systems where both phosphorus atoms are equivalent. For BDP-2 and Triphos-Co systems, the symmetric bisphosphine or triphosphine geometry creates equivalent steric pressure on both faces of the coordinating olefin, with no specific stabilization of the branched TS — explaining why these systems favor linear insertion. To maintain or improve linear selectivity: avoid introducing substituents on the bisphosphine that could create CH–pi or other non-covalent interactions with the branched-alkyl transition state.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- Negative CO order is mechanistically general for hydroformylation: CO inhibits catalysis by competing with olefin for coordination. This means that at very high CO partial pressure (>60 bar), activity will decrease. For Co systems at 52 bar, the CO partial pressure is already on the higher end — this explains why conversion does not scale linearly with pressure in the seed data.
+- Olefin insertion is irreversible at practical CO pressures, meaning selectivity cannot be improved after insertion. Conditions must favor linear insertion in the TS: lower temperature (slows both pathways but linear is thermodynamically slightly favored) and steric bulk on the ligand.
+- H2 is positive order — ensuring adequate H2 partial pressure is important for maintaining activity. Do not use CO-rich ratios above 2:1 without considering activity penalty.
+- For improving L:B in Co bisphosphine systems: avoid ligand modifications that add aromatic substituents near the substrate alkyl binding region, as these could inadvertently create CH–pi stabilization of the branched TS.
+- The irreversibility of olefin insertion means kinetic conditions at the moment of insertion determine selectivity — short reaction times and controlled temperature ramp-up can help capture the kinetically preferred linear product before equilibration.

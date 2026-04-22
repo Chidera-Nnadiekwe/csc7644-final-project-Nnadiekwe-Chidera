@@ -1,0 +1,22 @@
+SOURCE: Bernales, V.; Froese, R. D. "Rhodium Catalyzed Hydroformylation of Olefins." Journal of Computational Chemistry 2019, 40, 342–348. DOI: 10.1002/jcc.25605
+
+SUMMARY:
+This DFT and CCSD(T) computational study examines 61 different Rh catalyst variants for hydroformylation of ethylene, establishing that the CO stretching frequency (νCO) of the catalyst is the key electronic descriptor linking ligand pi-accepting character to catalytic activity. The study shows that stronger pi-accepting ligands systematically lower the ethylene insertion barrier from the HRh(CO)2L resting state, and identifies a crossover point (at νCO = 2156 cm-1) where the rate-limiting step shifts from olefin insertion to carbonylation. While ethylene-based, the electronic principles and the νCO descriptor are broadly applicable to Co bisphosphine catalysis.
+
+KEY FINDINGS:
+1. The CO stretching frequency (νCO) of HM(CO)nL complexes is a reliable single descriptor for predicting relative catalytic activity — no need to compute the full catalytic cycle.
+2. Stronger pi-accepting ligands (higher νCO) give lower ethylene insertion barriers: the barrier decreases monotonically with increasing νCO across phosphites, phosphines, and NHC ligands.
+3. There is no correlation between CO dissociation energy and νCO — these are independent quantities.
+4. The carbonylation (CO insertion) transition state energy is relatively insensitive to ligand electronic character, while the olefin insertion TS is highly sensitive.
+5. At νCO > 2156 cm-1, the rate-limiting step switches from olefin insertion to carbonylation, predicting diminishing returns for further increases in pi-accepting character.
+6. These results quantitatively confirm and extend the Sparta et al. 2007 experimental observations on the activity-electronic relationship.
+
+MECHANISTIC INSIGHT:
+The rate-limiting step for most phosphine-modified Co and Rh catalysts under normal conditions is olefin coordination/insertion. More pi-accepting ligands reduce the electron density at the metal center, weakening the M–CO bond (facilitating CO dissociation) and simultaneously strengthening metal–olefin backbonding (improving olefin coordination). This creates a lower-energy pathway to the olefin-inserted intermediate. However, once the pi-accepting character exceeds a threshold, CO insertion becomes rate-limiting and further increases in ligand pi-acceptance no longer improve activity.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION (translated to Co bisphosphine context):
+- The CO stretching frequency in the IR spectrum of your Co bisphosphine catalyst is a directly measurable descriptor of expected activity. For BDP-2 and Triphos Co complexes, measuring νCO by IR can help predict and compare activity before running full hydroformylation experiments.
+- Higher νCO (more pi-accepting bisphosphine) → higher activity up to a threshold.
+- For designing next-generation bisphosphine ligands to replace BDP-2 or Triphos: electron-withdrawing substituents on phosphorus increase pi-acceptance and predicted activity.
+- The crossover at 2156 cm-1 (Rh system) provides a target region: for Co systems the threshold may differ, but the principle holds — optimize ligand pi-acceptance within an intermediate range.
+- Do not over-optimize pi-acceptance: very electron-poor bisphosphines may make the Co center too electrophilic, destabilizing the catalyst against decomposition or changing the selectivity-determining step.

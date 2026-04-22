@@ -1,0 +1,23 @@
+SOURCE: Vilches-Herrera, M.; Domke, L.; Börner, A. "Isomerization–Hydroformylation Tandem Reactions." ACS Catalysis 2014, 4, 1706–1730. DOI: 10.1021/cs401080f
+
+SUMMARY:
+This comprehensive review covers metal-catalyzed isomerization–hydroformylation (ISO-HF) tandem reactions, where a catalyst first isomerizes an internal or branched olefin to the terminal position and then hydroformylates it to give predominantly the linear aldehyde. Cobalt and rhodium catalysts are the primary focus. The review is directly relevant to the 1-hexene system, where isomerization competes with direct hydroformylation and where the interplay between isomerization rate and hydroformylation rate controls L:B selectivity.
+
+KEY FINDINGS:
+1. Cobalt catalysts (both unmodified HCo(CO)4 and phosphine-modified HCo(CO)3(PR3)) show inherently high isomerization activity, which can be exploited to funnel internal olefins into linear hydroformylation products, but also lowers L:B for nominally terminal substrates like 1-hexene.
+2. For terminal olefins, high isomerization activity means internal alkene isomers (2-hexene, 3-hexene) form rapidly and compete for hydroformylation, giving a mixture of branched aldehydes and reducing overall L:B.
+3. High CO pressure suppresses isomerization for both Co and Rh systems by occupying the coordination site needed for beta-hydride elimination. This is the primary lever for improving L:B when using high-isomerization catalysts.
+4. Temperature has opposing effects: higher temperature increases both isomerization and hydroformylation rates, but isomerization rate increases more steeply, eroding L:B at elevated temperature.
+5. Chelating bisphosphine ligands with large bite angles suppress isomerization more effectively than monodentate phosphines because they block the open coordination site needed for beta-hydride elimination.
+6. Solvent polarity: polar coordinating solvents slow isomerization relative to hydroformylation by stabilizing the catalyst in its hydroformylation-active form.
+7. Triphos (1,1,1-tris(diphenylphosphinomethyl)ethane, CH3C(CH2PPh2)3) modified Co catalysts show reduced isomerization relative to bisphosphine Co systems due to the tridentate coordination geometry blocking the free coordination site entirely.
+
+MECHANISTIC INSIGHT:
+Isomerization of terminal to internal olefin proceeds by insertion into the M–H bond followed by beta-hydride elimination in the opposite direction. This is suppressed by CO coordination (which requires a free site) and promoted by high temperature and low CO pressure. For Triphos-type ligands, the facial tridentate coordination leaves only one or two coordination sites for CO and substrate, geometrically restricting the beta-hydride elimination pathway required for isomerization. This is a key reason the Triphos system may give higher L:B than a bisphosphine system under similar conditions.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- To suppress isomerization and improve L:B with Co bisphosphine: increase CO partial pressure (CO:H2 = 1:1 to 2:1), lower temperature (target 120–140°C rather than 160°C), and use polar coordinating solvents.
+- Triphos (tridentate) ligands are mechanistically predicted to reduce isomerization more than chelating bisphosphines by blocking the free coordination site required for beta-hydride elimination.
+- A short reaction time (1–2 h) favors the linear product because isomerization is a competing equilibration process — longer times allow the olefin pool to fully isomerize.
+- Monitor the olefin product distribution (GC) alongside aldehyde products: high internal olefin content in unreacted substrate indicates active isomerization before hydroformylation.
+- CO:H2 ratios above 1:1 (CO-rich) are particularly effective for Co-based systems to improve L:B at the cost of some activity.
