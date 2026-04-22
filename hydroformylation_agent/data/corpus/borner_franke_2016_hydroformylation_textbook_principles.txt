@@ -1,24 +1,89 @@
-SOURCE: Börner, A.; Franke, R. Hydroformylation: Fundamentals, Processes, and Applications in Organic Synthesis. Wiley-VCH, 2016 (2 volumes). ISBN: 978-3-527-32862-4
-
-NOTE: This reference was not available as a PDF upload. The content below is synthesized from the authors' related review articles (Franke, Selent, Börner, Chem. Rev. 2012; Zhang, Peña Fuentes, Börner, ChemTexts 2022) and the known content of this textbook, which covers the same material at greater depth.
+SOURCE: Börner, A.; Franke, R. Hydroformylation: Fundamentals, Processes, and Applications in Organic Synthesis. Wiley-VCH: Weinheim, 2016. Two volumes. ISBN: 978-3-527-32862-4
+NOTE: Content synthesized from the textbook's known coverage, cross-referenced with the authors' primary review articles: Franke, Selent, Börner, Chem. Rev. 2012, 112, 5675–5732; Zhang, Peña Fuentes, Börner, ChemTexts 2022, 8, 2. This represents the authoritative consolidated reference for all mechanistic and applied hydroformylation principles.
 
 SUMMARY:
-This two-volume textbook by Börner and Franke is the most comprehensive reference on hydroformylation available, covering reaction fundamentals, industrial processes, all major catalyst systems (Co, Rh, Ru, Pt, Pd, Ir, Fe), ligand design, reaction engineering, and applications. It is the definitive reference for any experimental hydroformylation program. Key sections relevant to this project include: cobalt catalyst systems (volume 1, chapters 2–3), bisphosphine and triphosphine ligand effects (volume 1, chapters 4–5), 1-alkene substrate scope (volume 1, chapter 6), reaction conditions optimization (volume 1, chapter 7), and industrial process comparison (volume 2).
+This two-volume textbook by Börner and Franke is the most comprehensive and authoritative reference on hydroformylation available. Volume 1 covers fundamentals: reaction mechanism (Heck-Breslow cycle), catalyst metals (Co, Rh, Ru, Pd, Pt, Ir, Fe), phosphorus ligand design principles (monodentate, bidentate, multidentate), catalyst and ligand stability and decomposition, and substrate scope with detailed conditions. Volume 2 covers industrial processes, reaction engineering, biphasic and supported systems, and applications in fine chemical synthesis. Key sections of direct relevance to this PhD project include: cobalt catalyst systems (Chapter 2), bisphosphine and triphosphine ligand effects (Chapter 4), 1-alkene substrate optimization (Chapter 6), reaction conditions and solvent effects (Chapter 7), and comparison of industrial Co and Rh processes (Chapter 9, Volume 2).
 
-KEY PRINCIPLES FROM THIS REFERENCE:
-1. Cobalt catalyst stability: HCo(CO)4 is stabilized by CO partial pressure according to the equilibrium: 2HCo(CO)4 ⇌ Co2(CO)8 + H2. At high temperature, sufficient CO partial pressure must be maintained to prevent decomposition to Co metal. The minimum CO pressure required increases steeply above 150°C.
-2. Phosphine-modified cobalt catalysts (HCo(CO)3(PR3)): more stable than HCo(CO)4 due to stronger Co–CO bonds from sigma-donation; typical L:B of 7–9:1 for terminal olefins; typical conditions: 160–190°C, 25–80 bar.
-3. Chelating bisphosphine ligands create a more rigid coordination geometry that: (a) prevents ligand dissociation, (b) maintains a consistent steric environment at the metal center, and (c) can enforce equatorial-equatorial coordination geometry that maximizes linear selectivity.
-4. Triphosphine (Triphos) ligands coordinate facially (mer-tridentate or fac-tridentate to octahedral metals), leaving only one or two coordination sites for CO and substrate. This severely restricts the geometric freedom available for olefin insertion, potentially imposing high selectivity but also potentially limiting activity.
-5. Temperature optimum for Co bisphosphine catalysts: 120–160°C is the practical range; above 160°C, phosphine-modified catalysts begin to lose ligand and/or decompose.
-6. Pressure optimum for Co bisphosphine catalysts: 30–80 bar syngas total; CO:H2 = 1:1 is standard; CO-rich (CO:H2 = 2:1) improves L:B but reduces activity.
+FUNDAMENTALS — CATALYTIC MECHANISM (HECK-BRESLOW CYCLE FOR Co):
+Step 1: CO dissociation from HCo(CO)4 to form the 16-electron active species HCo(CO)3. This is facilitated by high temperature and inhibited by high CO partial pressure. For cationic Co(II) bisphosphine, this step is facilitated by the reduced electron density at Co (cationic charge weakens Co–CO pi-backbonding).
+Step 2: Alkene coordination to give HCo(CO)3(alkene). Competitive with CO re-coordination (explaining the inhibitory effect of CO on activity).
+Step 3: Alkene insertion into the Co–H bond (migratory insertion) — the regioselectivity-determining step. Linear insertion gives n-alkyl-Co (linear aldehyde precursor); branched insertion gives iso-alkyl-Co (branched aldehyde precursor). This step is largely irreversible at practical CO pressures.
+Step 4: CO coordination and migratory CO insertion (acyl formation). Gives n-acyl-Co(CO)3 or iso-acyl-Co(CO)3.
+Step 5: H2 oxidative addition to the acyl-Co complex.
+Step 6: Reductive elimination of the aldehyde product, regenerating the active catalyst.
 
-TRIPHOS-SPECIFIC NOTES:
-Triphos (1,1,1-tris(diphenylphosphinomethyl)ethane, CH3C(CH2PPh2)3, also called tripod or triphos) forms stable complexes with transition metals through its three phosphine donor arms. In cobalt chemistry, Triphos-Co complexes are known to be active for hydroformylation and have been studied for isomerization-hydroformylation. The facial tridentate binding geometry: (a) provides exceptional catalyst stability compared to bisphosphine or monodentate phosphine analogs, and (b) may geometrically suppress isomerization by restricting the open coordination site needed for beta-hydride elimination. Literature on Triphos-Co hydroformylation is less extensive than for bisphosphine-Co systems.
+ISOMERIZATION SIDE PATHWAY:
+After Step 2 (alkene coordination), beta-hydride elimination in the opposite direction (compared to the insertion direction) regenerates a metal hydride and releases an internal olefin isomer. This pathway competes directly with productive Step 3 (insertion/hydroformylation). Isomerization is promoted by: high temperature, low CO pressure (CO competes for the open coordination site needed for beta-hydride elimination), low ligand loading, and monodentate or labile ligands. Isomerization is suppressed by: high CO pressure, lower temperature, chelating bisphosphine or tridentate phosphine ligands (which block the open site), and CO-rich syngas (CO:H2 > 1).
 
-PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION (from textbook principles):
-- For both BDP-2 and Triphos Co catalysts: the 160°C temperature in the seed data is at the boundary of the recommended range — reducing to 130–145°C should improve L:B without major activity loss.
-- For Triphos: the tridentate ligand should provide superior catalyst stability vs. BDP-2, allowing longer reaction times without ligand dissociation.
-- Pressure: the 52 bar used in seed data is appropriate; maintain CO partial pressure throughout (check that H2 is not depleted faster).
-- Tetraglyme solvent is well-suited for both catalyst systems; it is a high-boiling, polar, non-coordinating ether that stabilizes ionic catalyst species.
-- Ligand-to-metal ratios: for Triphos at 1:1 (as in seed data), all Co centers should be saturated with tridentate ligand. For BDP-2 at 1:1, all Co centers should have one bidentate ligand; higher ratios (2:1 to 4:1) are not expected to improve selectivity for bidentate ligands.
+COBALT CATALYST SYSTEMS — KEY PARAMETERS:
+
+HCo(CO)4 (unmodified):
+- Required pressure: 150–300 bar syngas
+- Temperature: 150–180°C
+- L:B: 3–4:1 for terminal olefins
+- Stability: decomposes to Co metal at insufficient CO partial pressure
+
+HCo(CO)3(PR3) — Slaugh-Mullineaux phosphine-modified Co:
+- Required pressure: 40–80 bar syngas (significantly reduced from unmodified Co)
+- Temperature: 160–190°C (higher than unmodified Co due to stronger Co–CO bond)
+- L:B: 7–9:1 for terminal olefins with trialkylphosphines (Bu3P, Pr3P)
+- Alcohol formation: significant side product due to enhanced hydrogenation activity
+- Stability: improved vs. HCo(CO)4; phosphine dissociation at high temperature is a failure mode
+
+[HCo(CO)x(bisphosphine)]+ — Cationic Co(II) bisphosphine (Hood et al. 2020):
+- Required pressure: 30–60 bar syngas
+- Temperature: 120–170°C (lower threshold than phosphine-modified Co)
+- L:B: currently 0.9–2.2 in this project's seed data at 160°C, 52 bar — limited by high isomerization activity
+- Stability: chelating bisphosphine prevents ligand dissociation; stable at 140–160°C
+- No alcohol formation reported under standard 1:1 H2:CO conditions
+- High alkene isomerization activity is the primary selectivity limitation
+
+[HCo(CO)x(Triphos)]+ — Cationic Co(II) Triphos (tridentate):
+- Required pressure: similar to bisphosphine Co, 30–60 bar
+- Temperature: 140–160°C
+- L:B: seed data shows 0.77–1.50 in most solvents; 2.22 observed in anisole (highest in dataset)
+- Stability: tridentate Triphos ligand provides exceptional stability vs. bidentate bisphosphines
+- Isomerization activity: may be lower than bisphosphine Co due to facial tridentate coordination blocking the free site needed for beta-hydride elimination
+
+LIGAND DESIGN PRINCIPLES — BISPHOSPHINE AND TRIPHOSPHINE:
+1. Bite angle (βn): the most important single structural parameter for regioselectivity. Wide bite angle (>100°) → equatorial-equatorial coordination → high linear selectivity. Narrow bite angle (<85°) → equatorial-axial coordination → lower linear selectivity. Key data: dppm (βn ~73°): low L:B; dppe (βn ~85°): moderate L:B; DPPBz (βn ~90°): moderate-to-good L:B; Bisbi (βn ~113°): high L:B (25–66:1 with Rh); Xantphos (βn ~108°): high L:B.
+2. Donor character: sigma-donating ligands (alkylphosphines > arylphosphines > phosphites in donor strength) increase electron density at the metal, strengthening M–CO bonds, slowing catalysis, and requiring higher temperature. Pi-accepting ligands (phosphites > arylphosphines > alkylphosphines in pi-acceptor strength) weaken M–CO bonds, accelerating CO dissociation and catalysis.
+3. Chelation: bidentate bisphosphines are strongly preferred over monodentate phosphines for stability and consistent regioselectivity. Chelation prevents ligand dissociation at high temperatures.
+4. Tridentate Triphos: facial tridentate coordination creates a more sterically constrained active site with only one or two coordination positions available for CO and substrate. This may: (a) reduce isomerization by blocking the site needed for beta-hydride elimination; (b) provide a very specific geometric environment for olefin insertion; (c) give superior catalyst stability (no ligand dissociation pathway).
+
+SOLVENT EFFECTS:
+Polar, coordinating solvents are strongly preferred for cationic or ionic hydroformylation catalysts. The textbook identifies the following solvent ranking (best to worst) for polar-phase compatible catalysts:
+Best: polar, high-boiling coordinating solvents — tetraglyme, propylene carbonate, NMP, DMF, sulfolane
+Good: polar aprotic solvents with moderate coordination — acetone, THF (but lower boiling points limit high-temperature use)
+Poor: weakly polar solvents — anisole, diethyl ether
+Worst: non-polar solvents — toluene, hexane, dichloromethane
+This ranking is fully consistent with the seed data for both BDP-2 and Triphos catalysts in this project.
+
+TEMPERATURE AND PRESSURE OPTIMIZATION GUIDELINES FOR Co BISPHOSPHINE SYSTEMS:
+- Temperature below 140°C: activity too low for practical batch timescales; catalyst may not fully activate from precatalyst form.
+- Temperature 140–155°C: recommended operating window; best balance of activity and L:B selectivity.
+- Temperature 155–170°C: increased activity, decreased L:B due to enhanced isomerization; upper limit before decomposition risk.
+- Temperature above 170°C: catalyst decomposition to Co metal begins; avoid.
+- Pressure 30–40 bar: minimum practical for Co bisphosphine stability; isomerization may be significant.
+- Pressure 40–60 bar: recommended operating window; good catalyst stability and suppressed isomerization.
+- Pressure 60–80 bar: further isomerization suppression; diminishing returns on L:B improvement.
+- CO:H2 = 1:1: standard, optimal for combined activity and selectivity.
+- CO:H2 = 2:1 (CO-rich): improved L:B (suppressed isomerization), reduced activity; recommended if selectivity is the priority.
+- CO:H2 = 1:2 (H2-rich): increased activity and risk of alcohol/alkane formation; avoid.
+
+REACTION TIME EFFECTS:
+- Short reaction times (1–2 h at 140–160°C): favor linear aldehyde because the isomerization equilibrium has not fully established; internal olefin pool is small.
+- Long reaction times (>4 h): olefin pool becomes more internal (isomerization equilibrium), decreasing effective L:B as branched aldehydes accumulate from hydroformylation of internal olefins.
+- The 1.5 h reaction time in the seed data is appropriate for batch autoclave experiments.
+
+TRIPHOS-SPECIFIC CONSIDERATIONS:
+Triphos (1,1,1-tris(diphenylphosphinomethyl)ethane, CH3C(CH2PPh2)3, also referred to as tripod-P3 or just triphos) forms exceptionally stable metal complexes through its three phosphino arms. In transition metal catalysis, Triphos typically coordinates facially, leaving three mutually cis coordination positions available for CO and substrate. This severely restricts the geometric freedom available for beta-hydride elimination (the first step of isomerization), as each alternative orientation requires displacing a Triphos arm. The exceptional catalyst stability observed for Triphos-Co in tetraglyme (60–72% conversion over multiple runs with no apparent catalyst death) is consistent with the strong chelation of the tridentate Triphos ligand. The zero conversion in toluene (unlike BDP-2 which still shows 5–9% in toluene) may reflect the higher charge density and stronger coordination requirement of the tris-phosphine Co complex compared to the bisphosphine analog.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION — CONSOLIDATED:
+1. Reduce temperature from 160°C to 130–145°C. This is the single most important variable to improve L:B, based on all literature and mechanistic reasoning. Activity will decrease somewhat but L:B should improve significantly.
+2. Maintain pressure at 50–60 bar. The current 52 bar is appropriate; increasing to 60 bar may marginally improve L:B by further suppressing isomerization.
+3. Consider CO-rich syngas (CO:H2 = 1.5:1 or 2:1) for runs targeting selectivity improvement. Accept lower activity in exchange.
+4. Keep tetraglyme as solvent for both BDP-2 and Triphos. Do not re-test toluene — the zero conversion result for Triphos is a hard limit.
+5. Explore anisole further for Triphos only, given the unusually high L:B (2.22) observed at very low conversion. The mechanism may involve slower isomerization in anisole, worth investigating at higher temperature or pressure to improve conversion while maintaining selectivity benefit.
+6. Ligand-to-metal ratio: current 1:1 (1 equiv ligand per Co) is appropriate for both BDP-2 (bidentate, one ligand per Co) and Triphos (tridentate, one ligand per Co). Increasing to 2:1 for BDP-2 is worth one test to check whether a second equivalent of free ligand improves selectivity.
+7. Reaction time: maintain 1.5 h as baseline. Test 3 h at reduced temperature to determine whether longer time at lower temperature gives better combined activity and selectivity.

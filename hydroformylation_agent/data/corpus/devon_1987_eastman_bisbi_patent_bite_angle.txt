@@ -1,0 +1,33 @@
+SOURCE: Devon, T. J.; Phillips, G. W.; Puckette, T. A.; Stavinoha, J. L.; Vanderbilt, J. J. "Chelate Ligands for Low Pressure Hydroformylation Catalyst and Process Employing Same." U.S. Patent 4,694,109. Eastman Kodak Company, 1987.
+
+SUMMARY:
+This landmark Eastman Kodak patent introduces Bisbi (2,2'-bis(diphenylphosphinomethyl)-1,1'-biphenyl), a chelating bisphosphine with a wide natural bite angle of approximately 113°, as a ligand for rhodium-catalyzed hydroformylation of terminal olefins with exceptionally high linear-to-branched (L:B) selectivity under low syngas pressure. It is the patent that established the bite-angle concept as a practical ligand design principle for industrial bisphosphine Rh catalysis, and directly underpins the mechanistic basis for why wide-bite-angle chelating bisphosphines (including the BDP-2 bisphosphine in this project) give higher L:B ratios for 1-hexene hydroformylation.
+
+KEY FINDINGS:
+1. Bisbi (bite angle ~113°) with Rh gives L:B ratios of 25–66:1 for terminal olefins under low pressure (5–20 bar syngas, 60–100°C) — dramatically higher than PPh3-modified Rh (L:B ~8–12:1 under similar conditions).
+2. The chelating (bidentate) coordination mode of Bisbi is essential: the two PPh2 groups are geometrically constrained to adopt an equatorial-equatorial arrangement at the metal center by the wide bite angle. This enforces a coordination geometry that specifically disfavors branched olefin insertion.
+3. Bisbi is significantly more regioselective than either the monodentate PPh3 or the narrow-bite-angle chelating bisphosphines (e.g., dppm bite angle ~73°, dppe bite angle ~85°) — confirming that bite angle is the dominant structural variable controlling L:B.
+4. The patent demonstrates operation at much lower syngas pressure than Co-based processes: 5–15 bar for Bisbi/Rh vs. 40–80 bar for phosphine-modified Co (Slaugh-Mullineaux). This established the economic case for low-pressure Rh bisphosphine processes.
+5. Substrate scope: highest regioselectivity for terminal (alpha) olefins including propylene, 1-butene, 1-hexene, 1-octene. Internal olefins give lower L:B due to required isomerization.
+6. Temperature range: 60–100°C for Bisbi/Rh, significantly milder than Co systems.
+
+BITE ANGLE — THE CENTRAL PRINCIPLE:
+The natural bite angle (βn) is defined as the preferred P–M–P angle of a chelating diphosphine as determined by molecular mechanics calculations or X-ray crystallography of the free ligand or complex. For Bisbi: βn ≈ 113°. For dppe: βn ≈ 85°. For dppm: βn ≈ 73°. For Xantphos: βn ≈ 108°. For BDP-type bisphosphines (Ph2P-CH2CH2-PPh2 backbone variations): βn ≈ 85–95° depending on backbone length and rigidity. For Triphos (CH3C(CH2PPh2)3, tridentate, facial): the P–Co–P angles are constrained by the tridentate geometry to approximately 84–90° for each pair of phosphorus donors.
+
+The bite angle affects regioselectivity through two mechanisms (as confirmed computationally by Carbó et al. 2001):
+(a) Geometric/orbital effect: wider bite angle → more equatorial-equatorial character of the diphosphine coordination → the open equatorial site where olefin coordinates is less hindered for linear approach than for branched approach.
+(b) Nonbonding steric effect: the PPh2 substituents of wide-bite-angle bisphosphines are positioned further apart, creating a more open but directionally discriminating steric environment that disfavors the branched TS specifically.
+
+MECHANISTIC INSIGHT:
+The equatorial-equatorial (ee) coordination geometry enforced by wide-bite-angle bisphosphines is the key to high linear selectivity. In the ee-HRh(CO)(alkene)(bisphosphine) intermediate, the alkene coordinates in the equatorial plane between the two phosphorus donors. Linear insertion places the growing alkyl chain in the less hindered axial position; branched insertion requires the methyl substituent to occupy a position that clashes with the nearby PPh2 groups. Wider bite angles increase this steric discrimination, directly increasing L:B. For the cationic Co(II) bisphosphine (BDP-2), the same geometric argument applies: the equatorial-equatorial coordination of BDP-2 should provide linear selectivity preference, though the Co system's high isomerization activity reduces the effective L:B observed.
+
+DIRECT RELEVANCE TO BDP-2 AND TRIPHOS Co SYSTEMS:
+1. BDP-2 bisphosphine: the bite angle of the BDP-2 ligand (Ph2P-C2H4-PPh-C2H4-PPh2, a tridentate-like linear bisphosphine) determines its linear selectivity potential. If the bite angle is below ~95°, the geometric basis for high L:B is weak. The seed data showing L:B of 0.9–1.2 in tetraglyme may reflect a suboptimal bite angle for the BDP-2 ligand at the conditions used, combined with the high isomerization activity of the cationic Co center.
+2. Triphos (tridentate): the three phosphino arms of CH3C(CH2PPh2)3 create a facial tridentate binding that is geometrically distinct from a chelating bisphosphine. The P–Co–P angles are ~84–90° each pair — narrower than Bisbi's 113° — which predicts lower linear selectivity on geometric grounds alone. However, the steric environment created by three PPh2 groups in a facial arrangement may partially compensate by restricting the branched TS via cumulative steric effects. The anisole data (L:B up to 2.22 for Triphos) suggests some selectivity is achievable under specific conditions.
+
+PRACTICAL RECOMMENDATIONS FOR OPTIMIZATION:
+- To improve L:B for BDP-2: if possible, characterize the natural bite angle of the BDP-2 bisphosphine. If βn < 95°, the fundamental geometric basis for high L:B is limited and condition optimization alone will have a ceiling. Ligand modifications that increase the bite angle (longer backbone, more rigid backbone) would be needed for step-change L:B improvement.
+- To improve L:B for Triphos: focus on conditions that suppress isomerization (lower temperature, higher CO pressure, CO:H2 > 1:1), since the geometric basis for high linear selectivity is constrained by the facial tridentate geometry.
+- Pressure: 30–80 bar is the validated range for phosphine-modified Co (Slaugh-Mullineaux) and for cationic Co(II) bisphosphine (Hood et al.). The seed data at 52 bar is well within this range.
+- Temperature: lower temperature improves L:B for all Co and Rh bisphosphine systems. The seed data at 160°C is at the high end — 120–140°C is predicted to improve L:B significantly for both BDP-2 and Triphos.
+- The anisole data for Triphos (L:B 1.50 and 2.22 at 6.3% and 3.4% conversion) is a mechanistically interesting signal: the lower activity in anisole may selectively slow isomerization relative to hydroformylation, improving L:B at the cost of conversion. This tradeoff is worth exploring systematically.

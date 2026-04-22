@@ -1,4 +1,6 @@
 SOURCE: Aubry, D. A.; Bridges, N. N.; Ezell, K.; Stanley, G. G. "Polar Phase Hydroformylation: The Dramatic Effect of Water on Mono- and Dirhodium Catalysts." Journal of the American Chemical Society 2003, 125, 11180–11181. DOI: 10.1021/ja035926w
+Institution: Department of Chemistry, Louisiana State University, Baton Rouge, LA 70803
+NOTE: Full content extracted from PDF — complete standalone file.
 
 SUMMARY:
 This communication from the Stanley group at LSU reports that adding 30% water (by volume) to acetone as solvent produces dramatic rate enhancements (30–265%) for the hydroformylation of 1-hexene with a range of Rh phosphine catalysts, including the dirhodium tetraphosphine catalyst and monometallic Rh/PPh3, Rh/Bisbi, Rh/Naphos, and Rh/Xantphos systems. Though Rh-based, this is directly relevant to understanding solvent polarity effects on hydroformylation activity and selectivity, especially for the Co bisphosphine system where tetraglyme (a polar, coordinating solvent) is the best performer.
