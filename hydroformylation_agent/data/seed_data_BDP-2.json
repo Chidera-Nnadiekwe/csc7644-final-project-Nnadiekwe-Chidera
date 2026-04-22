@@ -309,7 +309,7 @@
         "temperature_C": 160,
         "pressure_bar": 52,
         "co_h2_ratio": "1:1",
-        "solvent": "Anisole",
+        "solvent": "anisole",
         "reaction_time_h": 1.5
       },
       "outcomes": {
