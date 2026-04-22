@@ -251,5 +251,74 @@
     },
     "reasoning": "Seed data — manual run, no LLM reasoning.",
     "retrieved_passages": []
+  },
+  {
+    "iteration": 12,
+    "conditions": {
+      "substrate_smiles": "CCCCC=C",
+      "catalyst": "HCoCO(CH3C(CH2PPh2)3)",
+      "ligand": "CH3C(CH2PPh2)3",
+      "ligand_loading_eq": 1.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 160,
+      "pressure_bar": 52,
+      "co_h2_ratio": "1:1",
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
+    },
+    "outcomes": {
+      "conversion_pct": 61.5,
+      "l_b_ratio": 1.13, 
+      "ton": 568.9,
+      "notes": "Baseline run. high conversion, low selectivity."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
+  },
+  {
+    "iteration": 13,
+    "conditions": {
+      "substrate_smiles": "CCCCC=C",
+      "catalyst": "HCoCO(CH3C(CH2PPh2)3)",
+      "ligand": "CH3C(CH2PPh2)3",
+      "ligand_loading_eq": 1.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 160,
+      "pressure_bar": 52,
+      "co_h2_ratio": "1:1",
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
+    },
+    "outcomes": {
+      "conversion_pct": 65.5,
+      "l_b_ratio": 1.12, 
+      "ton": 606.0,
+      "notes": "Baseline run. high conversion, low selectivity."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
+  },
+  {
+    "iteration": 14,
+    "conditions": {
+      "substrate_smiles": "CCCCC=C",
+      "catalyst": "HCoCO(CH3C(CH2PPh2)3)",
+      "ligand": "CH3C(CH2PPh2)3",
+      "ligand_loading_eq": 1.0,
+      "catalyst_loading_mol_pct": 1.0,
+      "temperature_C": 160,
+      "pressure_bar": 52,
+      "co_h2_ratio": "1:1",
+      "solvent": "tetraglyme",
+      "reaction_time_h": 1.5
+    },
+    "outcomes": {
+      "conversion_pct": 58.7,
+      "l_b_ratio": 1.12, 
+      "ton": 543.0,
+      "notes": "Baseline run. good conversion, low selectivity."
+    },
+    "reasoning": "Seed data — manual run, no LLM reasoning.",
+    "retrieved_passages": []
   }
 ]
