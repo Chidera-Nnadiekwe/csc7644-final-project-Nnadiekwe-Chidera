@@ -44,6 +44,7 @@ from rag_retriever import RAGRetriever
 from llm_planner import LLMPlanner
 from result_parser import parse_experimental_result, load_seed_data
 from tool_layer import validate_smiles
+from gc_watcher import wait_for_gc_result
 
 load_dotenv(PROJECT_ROOT / ".env")
 
@@ -238,6 +239,11 @@ def run_agent(args: argparse.Namespace) -> None:
             outcomes = get_experimental_result_json()
         elif args.ingest_mode == "gc":
             outcomes = get_experimental_result_gc()
+        elif args.ingest_mode == "gc-watch":
+            outcomes = wait_for_gc_result(
+                watch_dir=args.gc_watch_dir,
+                timeout_s=args.gc_timeout,
+            )
         else:
             print(f"[WARN] Unknown ingest-mode '{args.ingest_mode}'. Defaulting to manual.")
             outcomes = get_experimental_result_manual()
@@ -293,8 +299,9 @@ def parse_args() -> argparse.Namespace:
                         dest="memory_file",
                         help="Path to experiment log JSON")
     parser.add_argument("--ingest-mode", type=str,   default="manual",
-                        dest="ingest_mode", choices=["manual", "json", "gc"],
-                        help="Result entry mode: manual | json | gc")
+                        dest="ingest_mode",
+                        choices=["manual", "json", "gc", "gc-watch"],
+                        help="Result entry mode: manual | json | gc | gc-watch")
     parser.add_argument("--seed-file",   type=str,   default=DEFAULT_SEED_FILE,
                         dest="seed_file",
                         help="Path to seed data JSON")
@@ -304,6 +311,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--consecutive", type=int, default=2,
                         dest="consecutive_required",
                         help="Consecutive runs all targets must be met before stopping (default: 2)")
+    parser.add_argument("--gc-watch-dir", type=str, default="data/gc_drops",
+                        dest="gc_watch_dir",
+                        help="Directory to watch for GC CSV files (gc-watch mode, default: data/gc_drops)")
+    parser.add_argument("--gc-timeout", type=int, default=300,
+                        dest="gc_timeout",
+                        help="Seconds to wait for a GC CSV before falling back to manual (default: 300)")
     return parser.parse_args()
 
 
