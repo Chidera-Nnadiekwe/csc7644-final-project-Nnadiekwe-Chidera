@@ -12,6 +12,7 @@ rdkit>=2023.9.1
 matplotlib>=3.8.0
 pandas>=2.2.0
 scipy>=1.12.0
+scikit-learn>=1.4.0
 
 # Notebook support
 jupyter>=1.0.0
