@@ -55,7 +55,7 @@ DEFAULT_TARGET_L_B_RATIO  = 5.0
 DEFAULT_TARGET_CONVERSION = 80.0
 DEFAULT_CORPUS_PATH       = str(PROJECT_ROOT / "data" / "corpus")
 DEFAULT_MEMORY_FILE       = str(PROJECT_ROOT / "data" / "experiment_log.json")
-DEFAULT_SEED_FILE         = str(PROJECT_ROOT / "data" / "seed_data.json")
+DEFAULT_SEED_FILE         = str(PROJECT_ROOT / "data" / "seed_data_BDP-2.json")
 
 # Defined a function to check stopping criteria based on iteration count and target metrics
 def check_stopping_criteria(history: list, max_iter: int,
