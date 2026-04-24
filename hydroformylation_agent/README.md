@@ -25,10 +25,14 @@ The following features distinguish this agentic LLM system from a more tradition
 - **Agentic optimization loop:** A fully autonomous, iterative decision-making framework that performs a closed-loop optimization process until a stopping criteria is met (e.g., max iterations, % conversion and/or L:B selectivity ratio).
 - **CoT chemical reasoning:** The agent reasons step-by-step from mechanistic standpoints before proposing conditions and producing interpretable rationale traces alongside each JSON proposal.
 - **RAG Grounding:** A FAISS index over 50–80 hydroformylation/isomerization literature documents grounds every proposal in published knowledge and reduces chemically unrealistic suggestions.
+- **Sentence-boundary-aware chunking:** Literature documents are chunked at sentence boundaries rather than hard word-count positions, preserving chemical facts across chunk windows and improving retrieval precision.
+- **Auto-selected FAISS index:** Uses `IndexFlatIP` for small corpora (< 256 chunks) and upgrades automatically to `IndexIVFFlat` at scale for sub-linear retrieval.
 - **Persistent memory store:** All previous runs, conditions, outcomes, and reasoning traces are persisted in a structured JSON log. The agent injects full history (≤ 20 runs) or a compressed summary (> 20 runs) into each prompt.
 - **Chemical validation layer:** RDKit SMILES validation and rule-based physical constraint checks (including temperature, pressure, syngas ratio, ligand) reject or warn on out-of-domain proposals before they reach the lab.
-- **Flexible result ingestion:** Supports manual CLI entry, structured JSON, and GC-MS area text parsing.
-- **Evaluation & visualisation:** Convergence plots, parameter scatter analyses, and quantitative metrics (best L:B, best yield, iterations-to-threshold) through `scripts/evaluation.py` and `notebooks/results_analysis.ipynb`.
+- **Flexible result ingestion:** Supports manual CLI entry, structured JSON, direct GC-area CSV parsing, and **automated GC file-watching** (`--ingest-mode gc-watch`) that polls a drop directory and parses new GC CSV files as they arrive — no manual terminal input required.
+- **Multi-objective evaluation:** Composite reward (weighted L:B + conversion + TON) with min-max normalisation, Pareto-front identification across all three objectives, and per-iteration reward plots.
+- **Strategy comparison:** `scripts/run_comparison.py` benchmarks Agent vs Random vs Bayesian (GP + Expected Improvement) over configurable runs × iterations, reporting mean ± std on all primary metrics.
+- **Evaluation & visualisation:** Convergence plots, parameter scatter analyses, composite reward and Pareto-front charts, and quantitative metrics through `scripts/evaluation.py` and `notebooks/results_analysis.ipynb`.
 
 ---
 
@@ -163,25 +167,31 @@ python src/agent_controller.py \
   --target-lb 5.0 \
   --target-conv 90.0 \
   --substrate "1-hexene" \
-  --CORPUS_PATH "data/corpus/" 
-  --memory-file "experiment_log.json" 
+  --corpus-path "data/corpus/" \
+  --memory-file "data/experiment_log.json" \
   --ingest-mode manual
 ```
 
 | Flag | Default | Description |
 |---|---|---|
-| `--max-iter` | 10 | Maximum number of optimization iterations |
+| `--max-iter` | 40 | Maximum number of optimization iterations |
 | `--target-lb` | 5.0 | L:B ratio for early stopping |
-| `--target-conv` | 90.0 | Aldehyde yield % for early stopping |
+| `--target-conv` | 80.0 | Aldehyde yield % for early stopping |
 | `--substrate` | `1-hexene` | Substrate name or SMILES |
+| `--corpus-path` | `data/corpus/` | Path to corpus `.txt` directory |
 | `--memory-file` | `data/experiment_log.json` | Path to experiment log |
-| `--ingest-mode` | `manual` | Result entry: `manual`, `json`, or `gc` |
+| `--ingest-mode` | `manual` | Result entry: `manual`, `json`, `gc`, or `gc-watch` |
+| `--gc-watch-dir` | `data/gc_drops` | Directory polled for GC CSV files (gc-watch mode) |
+| `--gc-timeout` | `300` | Seconds before gc-watch falls back to manual entry |
+| `--target-ton` | `0.0` | Minimum TON for early stopping (0 = not enforced) |
+| `--consecutive` | `2` | Consecutive runs all targets must be met before stopping |
 
 ### Result ingestion modes
 
 - **`manual`** — interactive CLI prompts for each outcome value (default for development).
 - **`json`** — supply a JSON string of outcomes (for scripted/automated use).
-- **`gc`** — paste a GC-MS area text block; the parser extracts conversion, yield, and L:B automatically.
+- **`gc`** — paste a path to a GC-MS area CSV; the parser extracts conversion, yield, and L:B automatically.
+- **`gc-watch`** — drop a GC export CSV into `data/gc_drops/` (or `--gc-watch-dir`) and the agent detects, parses, and ingests it automatically. Consumed files are moved to `data/gc_drops/done/`. Falls back to manual entry after `--gc-timeout` seconds.
 
 ### Run evaluation and generate plots
 
@@ -191,6 +201,18 @@ After at least two experimental iterations:
 python scripts/evaluation.py
 # Evaluation report saved to results/evaluation_report.json
 # Figures saved to results/figures/
+# Includes: lb_convergence.png, yield_convergence.png, composite_reward.png, pareto_front.png
+
+# Custom composite reward weights
+python scripts/evaluation.py --w-lb 0.5 --w-conv 0.3 --w-ton 0.2
+```
+
+### Run strategy comparison (Agent vs Random vs Bayesian)
+
+```bash
+python scripts/run_comparison.py --n-runs 3 --n-iter 20
+# Results saved to results/comparison_report.json
+# Figure: results/figures/strategy_comparison.png
 ```
 
 ### Open the results notebook
@@ -218,15 +240,17 @@ hydroformylation_agent/
 ├── src/
 │   ├── agent_controller.py        # Main controller loop — entry point
 │   ├── memory_store.py            # Load / save / query experiment log
-│   ├── rag_retriever.py           # FAISS RAG pipeline (embed to search to format)
+│   ├── rag_retriever.py           # FAISS RAG pipeline (sentence-boundary chunker + IVF index)
 │   ├── llm_planner.py             # Llama 3.1 70B API call, CoT and JSON parsing
 │   ├── tool_layer.py              # RDKit SMILES check and physical constraint guardrails
 │   ├── result_parser.py           # Result ingestion (GC CSV, JSON, manual)
+│   ├── gc_watcher.py              # File-system watcher for automatic GC CSV ingestion
 │   ├── prompts_templ.py           # All prompt templates (system, iteration and history)
 │   └── __init__.py                # Makes src/ a Python package for clean imports
 ├── scripts/
-│   ├── build_index.py             # One-time: chunk to embed to FAISS index (run first)
-│   └── evaluation.py              # Metrics computation and convergence plots
+│   ├── build_index.py             # One-time: sentence-boundary chunk → embed → FAISS index
+│   ├── evaluation.py              # Metrics, composite reward, Pareto front, convergence plots
+│   └── run_comparison.py          # Agent vs Random vs Bayesian GP (mean ± std, N runs)
 ├── notebooks/
 │   └── results_analysis.ipynb     # Interactive visualisation of agent performance
 ├── results/
