@@ -20,7 +20,7 @@ import os
 import numpy as np
 from pathlib import Path
 
-# Attempt to import FAISS and OpenAI, with graceful degradation if not available
+# Try to import FAISS and OpenAI, with graceful degradation if not available
 try:
     import faiss
     FAISS_AVAILABLE = True
@@ -37,17 +37,21 @@ except ImportError:
     print("[RAG] Warning: openai package not installed. RAG will return placeholder results.")
 
 # Constants for embedding and chunking
-EMBED_MODEL   = "text-embedding-3-small"
-CHUNK_SIZE    = 400   # words per chunk (matches report: CHUNK_SIZE=400)
-CHUNK_OVERLAP = 50    # words of overlap (matches report: CHUNK_OVERLAP=50)
-EMBEDDING_DIM = 1536  # dimension for text-embedding-3-small
+EMBED_MODEL     = "text-embedding-3-small"
+CHUNK_SIZE      = 400   # words per chunk
+CHUNK_OVERLAP   = 50    # words of overlap
+EMBEDDING_DIM   = 1536  # dimension for text-embedding-3-small
+
+# IVF index parameters used when corpus >= IVF_THRESHOLD chunks
+IVF_NLIST       = 32    # number of Voronoi cells
+IVF_NPROBE      = 8     # cells to visit at query time
 
 # RAGRetriever class definition
 class RAGRetriever:
     def __init__(self, corpus_dir: str = "data/corpus",
                  index_dir: str = "data/faiss_index"):
         self.corpus_dir = corpus_dir
-        # CHANGE: index stored in a dedicated directory, not CWD
+        # Index stored in a dedicated directory
         self.index_dir  = Path(index_dir)
         self.index_file = self.index_dir / "index.faiss"
         self.chunks_file = self.index_dir / "chunks.json"
@@ -90,23 +94,72 @@ class RAGRetriever:
 
     # Define helper method for chunking text
     def _chunk_text(self, text: str, source: str) -> list:
-        """Split a document into overlapping word-based chunks."""
-        words  = text.split()
-        chunks = []
-        start  = 0
-        chunk_idx = 0
-        while start < len(words):
-            end        = min(start + CHUNK_SIZE, len(words))
-            chunk_text = " ".join(words[start:end])
+        """Split a document into sentence-boundary-aware overlapping chunks.
+
+        Strategy:
+          1. Split the document into sentences using a lightweight regex tokeniser
+             (no NLTK dependency required).
+          2. Accumulate sentences until the running word count would exceed
+             CHUNK_SIZE.  At that boundary, flush the current chunk and slide
+             the window back by CHUNK_OVERLAP words (carrying over the tail
+             sentences whose total word count is closest to that overlap target).
+
+        This avoids the hard mid-sentence cuts produced by the original
+        word-index slicer, which can break key chemical facts across chunks
+        and hurt retrieval precision.
+        """
+        import re
+
+        # Sentence tokenisation 
+        # Split on '. ', '! ', '? ', '\n\n' while keeping the delimiter attached
+        # to the preceding sentence.
+        sentence_endings = re.compile(r'(?<=[.!?])\s+|(?<=\n)\n+')
+        raw_sentences = sentence_endings.split(text.strip())
+        sentences = [s.strip() for s in raw_sentences if s.strip()]
+
+        if not sentences:
+            return []
+
+        # Create overlapping chunks based on sentence boundaries
+        chunks: list = []
+        chunk_idx   = 0
+        window: list[str] = []   # sentence strings in current window
+        word_count  = 0
+
+        def flush(window: list[str]) -> None:
+            nonlocal chunk_idx
+            chunk_text = " ".join(window)
             chunks.append({
                 "chunk_id": f"{source}_{chunk_idx}",
                 "text":     chunk_text,
                 "source":   source,
             })
             chunk_idx += 1
-            if end == len(words):
-                break
-            start += CHUNK_SIZE - CHUNK_OVERLAP
+
+        for sent in sentences:
+            sent_wc = len(sent.split())
+            # If adding this sentence would overflow, flush first
+            if word_count + sent_wc > CHUNK_SIZE and window:
+                flush(window)
+                overlap_budget = CHUNK_OVERLAP
+                keep: list[str] = []
+                for s in reversed(window):
+                    s_wc = len(s.split())
+                    if overlap_budget - s_wc >= 0:
+                        keep.insert(0, s)
+                        overlap_budget -= s_wc
+                    else:
+                        break
+                window     = keep
+                word_count = sum(len(s.split()) for s in window)
+
+            window.append(sent)
+            word_count += sent_wc
+
+        # Flush the last partial window
+        if window:
+            flush(window)
+
         return chunks
 
     # Define helper method for embedding texts
@@ -128,7 +181,15 @@ class RAGRetriever:
 
     # Define method to build the FAISS index
     def _build_index(self) -> None:
-        """Build the FAISS index from the corpus and cache it to disk."""
+        """Build the FAISS index from the corpus and cache it to disk.
+
+        Index type selection:
+          - n_chunks < 256  → IndexFlatIP  (exact cosine, no training needed)
+          - n_chunks ≥ 256  → IndexIVFFlat (approximate, sub-linear at scale)
+        The IVF index is trained on the embedding matrix before adding vectors.
+        At query time, nprobe=IVF_NPROBE cells are visited for a good
+        precision / speed tradeoff.
+        """
         self.index_dir.mkdir(parents=True, exist_ok=True)
         raw_docs = self._load_texts_from_corpus()
 
@@ -143,7 +204,7 @@ class RAGRetriever:
         for doc in raw_docs:
             all_chunks.extend(self._chunk_text(doc["text"], doc["source"]))
 
-        print(f"[RAG] Created {len(all_chunks)} chunk(s) total.")
+        print(f"[RAG] Created {len(all_chunks)} chunk(s) total (sentence-boundary chunker).")
         self.chunks = all_chunks
 
         texts_only = [c["text"] for c in all_chunks]
@@ -153,20 +214,37 @@ class RAGRetriever:
             print("[RAG] FAISS not available — index not built.")
             return
 
-        # Use IndexFlatIP with L2-normalised vectors (cosine similarity)
+        # L2-normalise so inner-product == cosine similarity
         faiss.normalize_L2(vectors)
-        self.index = faiss.IndexFlatIP(EMBEDDING_DIM)
+        n = len(all_chunks)
+
+        if n >= 256:
+            # IVF index: train a quantiser, then add vectors
+            print(f"[RAG] Building IVFFlat index (nlist={IVF_NLIST}, n={n})...")
+            quantiser  = faiss.IndexFlatIP(EMBEDDING_DIM)
+            self.index = faiss.IndexIVFFlat(quantiser, EMBEDDING_DIM, IVF_NLIST,
+                                            faiss.METRIC_INNER_PRODUCT)
+            self.index.train(vectors)
+            self.index.nprobe = IVF_NPROBE
+        else:
+            print(f"[RAG] Building FlatIP index (n={n}, below IVF threshold of 256).")
+            self.index = faiss.IndexFlatIP(EMBEDDING_DIM)
+
         self.index.add(vectors)
 
         # Save index and metadata
         faiss.write_index(self.index, str(self.index_file))
         self.chunks_file.write_text(json.dumps(self.chunks, indent=2))
         metadata = {
-            "index_version":   "1.0",
+            "index_version":   "2.0",
             "embedding_model": EMBED_MODEL,
             "num_chunks":      len(all_chunks),
             "chunk_size":      CHUNK_SIZE,
             "chunk_overlap":   CHUNK_OVERLAP,
+            "chunker":         "sentence_boundary",
+            "index_type":      "IVFFlat" if n >= 256 else "FlatIP",
+            "ivf_nlist":       IVF_NLIST if n >= 256 else None,
+            "ivf_nprobe":      IVF_NPROBE if n >= 256 else None,
             "sources":         [d["source"] for d in raw_docs],
         }
         self.metadata_file.write_text(json.dumps(metadata, indent=2))
@@ -180,6 +258,9 @@ class RAGRetriever:
         try:
             self.index  = faiss.read_index(str(self.index_file))
             self.chunks = json.loads(self.chunks_file.read_text())
+            # Restore nprobe for IVF indexes
+            if hasattr(self.index, "nprobe"):
+                self.index.nprobe = IVF_NPROBE
             print(f"[RAG] Loaded cached index with {len(self.chunks)} chunk(s).")
         except Exception as e:
             print(f"[RAG] Could not load cached index: {e}. Rebuilding...")
