@@ -1,0 +1,32 @@
+{
+  "index_version": "2.0",
+  "embedding_model": "text-embedding-3-small",
+  "num_chunks": 41,
+  "chunk_size": 400,
+  "chunk_overlap": 50,
+  "chunker": "sentence_boundary",
+  "index_type": "FlatIP",
+  "ivf_nlist": null,
+  "ivf_nprobe": null,
+  "sources": [
+    "aubry_2003_polar_phase_hydroformylation_jacs.txt",
+    "bernales_froese_2019_dft_rh_hydroformylation_jcc.txt",
+    "borner_franke_2016_hydroformylation_textbook_principles.txt",
+    "carbo_2001_dft_regioselectivity_bite_angle_jacs.txt",
+    "devon_1987_eastman_bisbi_patent_bite_angle.txt",
+    "dingwall_2017_bobphos_branched_mechanism_jacs.txt",
+    "franke_selent_borner_2012_applied_hydroformylation_review.txt",
+    "holzknecht_2024_cobalt_precatalyst_purity_jacs.txt",
+    "hood_2020_cationic_cobalt_bisphosphine_science.txt",
+    "hood_2020_cobalt_hydroformylation.txt",
+    "hood_2023_cationic_cobalt_spectroscopic_jacs.txt",
+    "ligand_effects_and_optimization_review.txt",
+    "slaugh_mullineaux_1966_shell_patent_phosphine_cobalt.txt",
+    "smart_2024_branched_selective_hydroformylation_acscatal.txt",
+    "sparta_2007_rh_hydroformylation_activity_theory_jacs.txt",
+    "vilches-herrera_2014_isomerization_hydroformylation_tandem_review.txt",
+    "zhang_2022_unmodified_cobalt_mild_conditions_science.txt",
+    "zhang_borner_2022_hydroformylation_review_chemtexts.txt",
+    "zong_2024_spirocyclic_diphosphite_selectivity_sciadv.txt"
+  ]
+}
