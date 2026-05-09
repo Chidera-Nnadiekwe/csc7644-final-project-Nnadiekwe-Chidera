@@ -30,8 +30,5 @@ notebooks/.ipynb_checkpoints/
 .idea/
 *.swp
 
-# Matplotlib / output figures (optional — remove this line to track figures)
-results/
-
 # Logs
 *.log
