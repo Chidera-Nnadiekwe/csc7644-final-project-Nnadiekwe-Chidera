@@ -24,7 +24,7 @@ The primary target metrics are **aldehyde yield (%)** and **linear-to-branch (L:
 The following features distinguish this agentic LLM system from a more traditional human-in-the-loop workflow:
 - **Agentic optimization loop:** A fully autonomous, iterative decision-making framework that performs a closed-loop optimization process until a stopping criteria is met (e.g., max iterations, % conversion and/or L:B selectivity ratio).
 - **CoT chemical reasoning:** The agent reasons step-by-step from mechanistic standpoints before proposing conditions and producing interpretable rationale traces alongside each JSON proposal.
-- **RAG Grounding:** A FAISS index over 50–80 hydroformylation/isomerization literature documents grounds every proposal in published knowledge and reduces chemically unrealistic suggestions.
+- **RAG Grounding:** A FAISS index over 20–80 hydroformylation/isomerization literature documents grounds every proposal in published knowledge and reduces chemically unrealistic suggestions.
 - **Sentence-boundary-aware chunking:** Literature documents are chunked at sentence boundaries rather than hard word-count positions, preserving chemical facts across chunk windows and improving retrieval precision.
 - **Auto-selected FAISS index:** Uses `IndexFlatIP` for small corpora (< 256 chunks) and upgrades automatically to `IndexIVFFlat` at scale for sub-linear retrieval.
 - **Persistent memory store:** All previous runs, conditions, outcomes, and reasoning traces are persisted in a structured JSON log. The agent injects full history (≤ 20 runs) or a compressed summary (> 20 runs) into each prompt.
@@ -32,7 +32,7 @@ The following features distinguish this agentic LLM system from a more tradition
 - **Flexible result ingestion:** Supports manual CLI entry, structured JSON, direct GC-area CSV parsing, and **automated GC file-watching** (`--ingest-mode gc-watch`) that polls a drop directory and parses new GC CSV files as they arrive — no manual terminal input required.
 - **Multi-objective evaluation:** Composite reward (weighted L:B + conversion + TON) with min-max normalisation, Pareto-front identification across all three objectives, and per-iteration reward plots.
 - **Strategy comparison:** `scripts/run_comparison.py` benchmarks Agent vs Random vs Bayesian (GP + Expected Improvement) over configurable runs × iterations, reporting mean ± std on all primary metrics.
-- **Evaluation & visualisation:** Convergence plots, parameter scatter analyses, composite reward and Pareto-front charts, and quantitative metrics through `scripts/evaluation.py` and `notebooks/results_analysis.ipynb`.
+- **Evaluation & visualisation:** Convergence plots, composite reward and Pareto-front charts, and quantitative metrics through `scripts/evaluation.py` and `notebooks/results_analysis.ipynb`.
 
 ---
 
@@ -72,7 +72,7 @@ The following features distinguish this agentic LLM system from a more tradition
 1. `memory_store.py` → builds history block from JSON log
 2. `rag_retriever.py` → queries FAISS index, returns top-3 literature passages
 3. `llm_planner.py` → sends structured prompt to Llama 3.1 70B, receives CoT + JSON conditions
-4. `tool_layer.py` → checks SMILES validity + physical bounds; rejects bad proposals
+4. `tool_layer.py` → checks SMILES validity and physical bounds; rejects bad proposals
 5. User runs experiment; `result_parser.py` → ingests GC/NMR results
 6. `memory_store.py` → appends run record to JSON log; repeat
 
@@ -99,9 +99,9 @@ cd csc7644-final-project-Nnadiekwe-Chidera/hydroformylation_agent/
 ### 2. Create and activate a virtual environment
 
 ```bash
-conda create -n csc7644_env python=3.12 # create env with Python 3.12
-conda activate csc7644_env              # activate the environment
-conda deactivate                        # deactivate when done
+conda create -n csc7644_env python=3.12   # create env with Python 3.12
+conda activate csc7644_env                # activate the environment
+conda deactivate                          # deactivate when done
 ```
 
 ### 3. Install dependencies
@@ -115,25 +115,33 @@ pip install -r requirements.txt
 ### 4. Configure environment variables
 
 ```bash
+# Windows
+copy .env.template .env
+notepad .env
+```
+
+```bash
+# macOS / Linux
 cp .env.template .env
 ```
 
-Open `.env` in a text editor and fill in your API keys:
+Open `.env` and fill in your API keys (no quotes, no spaces around `=`):
 
 ```
-OPENROUTER_API_KEY=sk-or-...
-OPENAI_API_KEY=sk-...
+OPENROUTER_API_KEY=sk-or-your-actual-key
+OPENAI_API_KEY=sk-your-actual-key
 ```
 
-Then load them into your shell (or use `python-dotenv` — already imported in each module):
-
-```bash
-export $(grep -v '^#' .env | xargs)
-```
+> **Windows note:** `python-dotenv` loads `.env` automatically. If you ever see `KeyError: 'OPENAI_API_KEY'`, set the keys directly in your terminal session for that window:
+> ```
+> set OPENAI_API_KEY=sk-your-actual-key
+> set OPENROUTER_API_KEY=sk-or-your-actual-key
+> ```
+> For a permanent fix, use `setx` instead of `set` and reopen the terminal.
 
 ### 5. Add literature files
 
-Place plain-text (`.txt`) versions of your hydroformylation/isomerization literature in `data/corpus/`. The more documents are added, the better the RAG retrieval.
+Place plain-text (`.txt`) versions of your hydroformylation/isomerization literature in `data/corpus/`. The more documents added, the better the RAG retrieval.
 
 ### 6. Build the FAISS index
 
@@ -143,11 +151,19 @@ This only needs to be run once (or again when you add new literature):
 python scripts/build_index.py
 ```
 
+Expected output:
+```
+[INFO] Total chunks created: 41
+[INFO] Embedding batch 1-41 of 41 ...
+[INFO] FAISS index built with 41 vectors.
+[INFO] Index build complete.
+```
+
 ---
 
 ## Running the Application
 
-### Start the optimizat ion agent
+### Start the optimization agent
 
 ```bash
 python src/agent_controller.py
@@ -159,25 +175,39 @@ The agent will:
 3. Prompt you to enter experimental results after each iteration.
 4. Save everything and loop until `--max-iter` is reached or a target is hit.
 
+> **Important:** `--max-iter` counts **total runs including seed runs**. With 14 seed runs loaded, use `--max-iter 16` or higher to get at least one new agent-proposed iteration.
+
 **Full CLI options:**
 
 ```bash
+# Windows (use ^ for line continuation)
+python src/agent_controller.py ^
+  --max-iter 20 ^
+  --target-lb 5.0 ^
+  --target-conv 80.0 ^
+  --substrate "1-hexene" ^
+  --seed-file "data/seed_data_BDP-2.json" ^
+  --memory-file "data/experiment_log.json" ^
+  --ingest-mode manual
+
+# macOS / Linux (use \ for line continuation)
 python src/agent_controller.py \
-  --max-iter 10 \
+  --max-iter 20 \
   --target-lb 5.0 \
-  --target-conv 90.0 \
+  --target-conv 80.0 \
   --substrate "1-hexene" \
-  --corpus-path "data/corpus/" \
+  --seed-file "data/seed_data_BDP-2.json" \
   --memory-file "data/experiment_log.json" \
   --ingest-mode manual
 ```
 
 | Flag | Default | Description |
 |---|---|---|
-| `--max-iter` | 40 | Maximum number of optimization iterations |
+| `--max-iter` | 40 | Maximum number of optimization iterations (includes seed runs) |
 | `--target-lb` | 5.0 | L:B ratio for early stopping |
 | `--target-conv` | 80.0 | Aldehyde yield % for early stopping |
 | `--substrate` | `1-hexene` | Substrate name or SMILES |
+| `--seed-file` | `data/seed_data_BDP-2.json` | Path to seed JSON (`seed_data_BDP-2.json` or `seed_data_Triphos.json`) |
 | `--corpus-path` | `data/corpus/` | Path to corpus `.txt` directory |
 | `--memory-file` | `data/experiment_log.json` | Path to experiment log |
 | `--ingest-mode` | `manual` | Result entry: `manual`, `json`, `gc`, or `gc-watch` |
@@ -198,19 +228,25 @@ python src/agent_controller.py \
 After at least two experimental iterations:
 
 ```bash
-python scripts/evaluation.py
-# Evaluation report saved to results/evaluation_report.json
-# Figures saved to results/figures/
-# Includes: lb_convergence.png, yield_convergence.png, composite_reward.png, pareto_front.png
+python scripts/evaluation.py --log "data/experiment_log.json"
 
 # Custom composite reward weights
-python scripts/evaluation.py --w-lb 0.5 --w-conv 0.3 --w-ton 0.2
+python scripts/evaluation.py --log "data/experiment_log.json" --w-lb 0.5 --w-conv 0.3 --w-ton 0.2
+```
+
+Outputs saved to:
+```
+results/evaluation_report.json
+results/figures/lb_convergence.png
+results/figures/yield_convergence.png
+results/figures/composite_reward.png
+results/figures/pareto_front.png
 ```
 
 ### Run strategy comparison (Agent vs Random vs Bayesian)
 
 ```bash
-python scripts/run_comparison.py --n-runs 3 --n-iter 20
+python scripts/run_comparison.py --n-runs 3 --n-iter 10
 # Results saved to results/comparison_report.json
 # Figure: results/figures/strategy_comparison.png
 ```
@@ -228,40 +264,45 @@ jupyter notebook notebooks/results_analysis.ipynb
 ```
 hydroformylation_agent/
 ├── data/
-│   ├── experiment_log.json        # Persistent memory — all run records
-│   ├── seed_data.json             # Initial PhD lab run data to bootstrap memory store
-│   ├── corpus/                    # Plain-text .txt files for RAG corpus (add papers here)
+│   ├── experiment_log.json          # Persistent memory — all run records
+│   ├── experiment_log_BDP-2.json    # Memory log for BDP-2 ligand system
+│   ├── experiment_log_Triphos.json  # Memory log for Triphos ligand system
+│   ├── seed_data_BDP-2.json         # 14 real PhD lab runs (BDP-2) to bootstrap memory
+│   ├── seed_data_Triphos.json       # Seed runs for Triphos ligand system
+│   ├── corpus/                      # Plain-text .txt files for RAG corpus (add more papers here)
 │   │   ├── hood_2020_cobalt_hydroformylation.txt
 │   │   └── ligand_effects_and_optimization_review.txt
-│   └── faiss_index/               # Built FAISS index (auto-generated by build_index.py)
-│       ├── index.faiss
-│       ├── chunks.json
-│       └── metadata.json
+│   ├── faiss_index/                 # Built FAISS index (auto-generated by build_index.py)
+│   │   ├── index.faiss
+│   │   ├── chunks.json
+│   │   └── metadata.json
+│   └── gc_drops/                    # Drop GC CSV files here for gc-watch ingestion
+│       └── done/                    # Processed GC files moved here automatically
 ├── src/
-│   ├── agent_controller.py        # Main controller loop — entry point
-│   ├── memory_store.py            # Load / save / query experiment log
-│   ├── rag_retriever.py           # FAISS RAG pipeline (sentence-boundary chunker + IVF index)
-│   ├── llm_planner.py             # Llama 3.1 70B API call, CoT and JSON parsing
-│   ├── tool_layer.py              # RDKit SMILES check and physical constraint guardrails
-│   ├── result_parser.py           # Result ingestion (GC CSV, JSON, manual)
-│   ├── gc_watcher.py              # File-system watcher for automatic GC CSV ingestion
-│   ├── prompts_templ.py           # All prompt templates (system, iteration and history)
-│   └── __init__.py                # Makes src/ a Python package for clean imports
+│   ├── agent_controller.py          # Main controller loop — entry point
+│   ├── memory_store.py              # Load / save / query experiment log
+│   ├── rag_retriever.py             # FAISS RAG pipeline (sentence-boundary chunker + IVF index)
+│   ├── llm_planner.py               # Llama 3.1 70B API call, CoT and JSON parsing
+│   ├── tool_layer.py                # RDKit SMILES check and physical constraint guardrails
+│   ├── result_parser.py             # Result ingestion (GC CSV, JSON, manual)
+│   ├── gc_watcher.py                # File-system watcher for automatic GC CSV ingestion
+│   ├── prompts_templ.py             # All prompt templates (system, iteration and history)
+│   └── __init__.py                  # Makes src/ a Python package for clean imports
 ├── scripts/
-│   ├── build_index.py             # One-time: sentence-boundary chunk → embed → FAISS index
-│   ├── evaluation.py              # Metrics, composite reward, Pareto front, convergence plots
-│   └── run_comparison.py          # Agent vs Random vs Bayesian GP (mean ± std, N runs)
+│   ├── build_index.py               # One-time: sentence-boundary chunk → embed → FAISS index
+│   ├── evaluation.py                # Metrics, composite reward, Pareto front, convergence plots
+│   └── run_comparison.py            # Agent vs Random vs Bayesian GP (mean ± std, N runs)
 ├── notebooks/
-│   └── results_analysis.ipynb     # Interactive visualisation of agent performance
+│   └── results_analysis.ipynb      # Interactive visualisation of agent performance
 ├── results/
-│   ├── evaluation_report.json     # Auto-generated metrics (created by evaluation.py)
-│   └── figures/                   # Auto-generated plots (created at evaluation time)
+│   ├── evaluation_report.json       # Auto-generated metrics (created by evaluation.py)
+│   └── figures/                     # Auto-generated plots (created at evaluation time)
 │       ├── lb_convergence.png
 │       ├── yield_convergence.png
-│       ├── parameter_lb_scatter.png
-│       └── agent_vs_baseline.png
-├── .env.template                  # Environment variable template (safe to commit)
-├── .gitignore                     # Excludes .env, venv/, __pycache__, *.faiss, etc.
+│       ├── composite_reward.png
+│       └── pareto_front.png
+├── .env.template                    # Environment variable template (safe to commit)
+├── .gitignore                       # Excludes .env, venv/, __pycache__, *.faiss, etc.
 ├── requirements.txt
 └── README.md
 ```
@@ -271,7 +312,16 @@ hydroformylation_agent/
 - Prompt engineering lives entirely in `src/prompts_templ.py`.
 - To tune the LLM call (model, max_tokens, temperature), edit `src/llm_planner.py`.
 - Evaluation plots and the JSON report are generated by `scripts/evaluation.py` and visualised in the notebook.
-- Seed data for bootstrapping the memory store on first run lives in `data/seed_data.json`.
+- Seed data for bootstrapping the memory store on first run lives in `data/seed_data_BDP-2.json` (BDP-2 ligand system) or `data/seed_data_Triphos.json` (Triphos ligand system).
+
+---
+
+## Known Quirks
+
+- **`--max-iter` counts total runs including seeds.** With 14 seed runs, set `--max-iter 16` or higher to get at least one new agent iteration.
+- **`evaluation.py` requires `--log`, not `--memory-file`:** `python scripts/evaluation.py --log "data/experiment_log.json"`
+- **The agent may propose identical conditions on consecutive iterations** when it judges a result near-optimal. This is expected LLM behavior, not a bug.
+- **`EOFError` on input prompt** means the terminal was interrupted (Ctrl+C). Already-saved runs are preserved in the JSON log.
 
 ---
 
@@ -314,4 +364,4 @@ No external code was directly adapted. All module implementations are original, 
 
 ## License
 
-This repository is for academic use as part of CSC 7644 Final Project. All rights reserved by Chidera C. Nnadiekwe. No commercial use or redistribution without explicit permission. For reuse inquiries, please contact the author.
+This repository is for academic use as part of CSC 7644 Final Project. All rights reserved by Chidera C. Nnadiekwe. No commercial use or redistribution without explicit permission. For reuse inquiries, please contact the author on churchill_2014@yahoo.com or cnnadi2@lsu.edu.
