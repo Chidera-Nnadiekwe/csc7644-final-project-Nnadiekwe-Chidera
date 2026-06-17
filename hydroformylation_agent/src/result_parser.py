@@ -149,7 +149,7 @@ def parse_from_dict(raw: dict) -> dict:
 def load_seed_data(filepath: str) -> list:
     """
     Load initial experimental data from a JSON file to seed the memory store.
-    This is useful for loading your existing PhD experimental runs at the start.
+    This is useful for loading your existing experimental runs at the start.
 
     Expected JSON format:
     [

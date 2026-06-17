@@ -267,8 +267,8 @@ hydroformylation_agent/
 │   ├── experiment_log.json          # Persistent memory — all run records
 │   ├── experiment_log_BDP-2.json    # Memory log for BDP-2 ligand system
 │   ├── experiment_log_Triphos.json  # Memory log for Triphos ligand system
-│   ├── seed_data_BDP-2.json         # 14 real PhD lab runs (BDP-2) to bootstrap memory
-│   ├── seed_data_Triphos.json       # Seed runs for Triphos ligand system
+│   ├── seed_data_BDP-2.json         # Actual lab data to bootstrap memory
+│   ├── seed_data_Triphos.json       # Seed data for Triphos ligand system
 │   ├── corpus/                      # Plain-text .txt files for RAG corpus (add more papers here)
 │   │   ├── hood_2020_cobalt_hydroformylation.txt
 │   │   └── ligand_effects_and_optimization_review.txt
